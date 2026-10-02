@@ -16,6 +16,7 @@ SUPPORTED_OPERATORS = {
         "On", "Before", "After", "Within last (days)", "Is empty", "Is not empty",
     },
 }
+SUPPORTED_RESULT_GROUPS = {"cases", "claims"}
 
 _category_configs = []
 _seen_categories = set()
@@ -45,6 +46,7 @@ if not _category_configs:
 FIELD_GROUPS = {}
 FIELD_TYPES = {}
 FIELD_OPERATORS = {}
+FIELD_RESULT_GROUPS = {}
 _seen_keys = set()
 
 for _order, _group_name, _fields in sorted(_category_configs):
@@ -57,6 +59,7 @@ for _order, _group_name, _fields in sorted(_category_configs):
         _label = _field.get("label")
         _field_type = _field.get("type")
         _operators = _field.get("operators")
+        _result_groups = _field.get("result_groups", [])
         if not isinstance(_key, str) or not _key.strip():
             raise ValueError(f"A field in {_group_name!r} is missing a non-empty key")
         if _key in _seen_keys:
@@ -72,8 +75,15 @@ for _order, _group_name, _fields in sorted(_category_configs):
             raise ValueError(f"Search field {_key!r} contains an unsupported operator")
         if len(_operators) != len(set(_operators)):
             raise ValueError(f"Search field {_key!r} contains duplicate operators")
+        if not isinstance(_result_groups, list) or any(
+            _group not in SUPPORTED_RESULT_GROUPS for _group in _result_groups
+        ):
+            raise ValueError(f"Search field {_key!r} contains an unsupported result group")
+        if len(_result_groups) != len(set(_result_groups)):
+            raise ValueError(f"Search field {_key!r} contains duplicate result groups")
 
         _seen_keys.add(_key)
         FIELD_GROUPS[_group_name].append((_key, _label, _field_type))
         FIELD_TYPES[_key] = _field_type
         FIELD_OPERATORS[_key] = list(_operators)
+        FIELD_RESULT_GROUPS[_key] = list(_result_groups)

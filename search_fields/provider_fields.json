@@ -29,6 +29,9 @@
         "Starts with",
         "Is empty",
         "Is not empty"
+      ],
+      "result_groups": [
+        "claims"
       ]
     },
     {
@@ -205,6 +208,9 @@
         "Starts with",
         "Is empty",
         "Is not empty"
+      ],
+      "result_groups": [
+        "claims"
       ]
     },
     {

@@ -6,7 +6,7 @@ import streamlit as st
 from database import fetch_records
 from db_config import get_settings
 
-from search_fields import FIELD_GROUPS, FIELD_OPERATORS, FIELD_TYPES
+from search_fields import FIELD_GROUPS, FIELD_OPERATORS, FIELD_RESULT_GROUPS, FIELD_TYPES
 
 SIDEBAR_FIELD_GROUPS = {
     group: fields for group, fields in FIELD_GROUPS.items() if group != "Case Details"
@@ -20,34 +20,10 @@ FIELD_LABELS = {
 MATCH_MODES = ["Match all (AND)", "Match any (OR)"]
 
 CASE_RESULT_FIELDS = [
-    "case_number",
-    "c__case_id",
-    "c__revision",
-    "c__case_status",
-    "c__case_substatus",
-    "c__status",
-    "c__assigned_to_name",
-    "c__lob",
-    "c__created_dts",
-    "c__closed_dts",
+    field_key for field_key, groups in FIELD_RESULT_GROUPS.items() if "cases" in groups
 ]
 CLAIM_RESULT_FIELDS = [
-    "cl__claim_details_id",
-    "d__claim_decision_id",
-    "case_number",
-    "claim_number",
-    "mbi",
-    "provider_name",
-    "provider_number",
-    "claim_status",
-    "qc_status",
-    "qc_review_status",
-    "qc_review",
-    "qc_review_comment",
-    "focus_code",
-    "over_payment",
-    "reviewed_by",
-    "reviewed_dts",
+    field_key for field_key, groups in FIELD_RESULT_GROUPS.items() if "claims" in groups
 ]
 
 
