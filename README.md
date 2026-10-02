@@ -12,6 +12,16 @@ python app.py
 Select case, claim, or decision fields to add filter rows. Each row has a field-specific
 operator and value. Search supports combining filters with AND or OR and now reads
 from PostgreSQL. Empty databases return no results; there is no sample fallback.
+Name and save complete searches, including fields, operators, values, and AND/OR mode.
+Saved searches stay in the current browser and can be loaded or run separately. Date
+filters support a rolling `Within last (days)` range, such as 90 days.
+
+`search_fields.json` is the field catalog. Each entry defines its group, result key,
+display label, data type, and allowed operators. Edit this file to rename fields or
+change their operators; restart the app to reload it. New field keys must match aliases
+returned by `search_postgres.sql`; add a SQL mapping there if the alias is not already
+selected. Supported types are `text`, `number`, and `date`, with operators validated
+by the JSON loader in `search_fields.py`.
 
 `schema.sql` defines the separate `pic_master1` PostgreSQL schema. The six tables use typed relational columns transcribed from the supplied screenshots. The app does not run DDL automatically.
 

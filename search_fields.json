@@ -1,0 +1,2265 @@
+{
+  "Case Fields": [
+    {
+      "key": "c__case_id",
+      "label": "Case Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__revision",
+      "label": "Revision",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__case_details_id",
+      "label": "Case Details Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__lob",
+      "label": "Lob",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__mac",
+      "label": "Mac",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__is_act_ind",
+      "label": "Is Act Ind",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__case_type_id",
+      "label": "Case Type Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__case_status",
+      "label": "Case Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__case_substatus",
+      "label": "Case Substatus",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__assigned_to",
+      "label": "Assigned To",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__status",
+      "label": "Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__created_by",
+      "label": "Created By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__created_dts",
+      "label": "Created Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__updated_by",
+      "label": "Updated By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__updated_dts",
+      "label": "Updated Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "case_number",
+      "label": "Case Number",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__assigned_to_name",
+      "label": "Assigned To Name",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__adr_ltr_sent_dt",
+      "label": "Adr Ltr Sent Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__original_due_dt",
+      "label": "Original Due Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__new_due_dt",
+      "label": "New Due Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__bill_type",
+      "label": "Bill Type",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__adr_ltr_rcvd_dt",
+      "label": "Adr Ltr Rcvd Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__closed_dts",
+      "label": "Closed Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__rvsn_reason",
+      "label": "Rvsn Reason",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__assigned_dt",
+      "label": "Assigned Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__reference_case_number",
+      "label": "Reference Case Number",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__informatics_case_type",
+      "label": "Informatics Case Type",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__ref_demand_bill",
+      "label": "Ref Demand Bill",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__timeliness_dt",
+      "label": "Timeliness Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__adjudication_process",
+      "label": "Adjudication Process",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__ovrd_closed_dts",
+      "label": "Ovrd Closed Dts",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__smpl_met_dt",
+      "label": "Smpl Met Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__language",
+      "label": "Language",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "c__adjudication_date",
+      "label": "Adjudication Date",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    }
+  ],
+  "Case Details": [
+    {
+      "key": "cd__case_details_id",
+      "label": "Case Details Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__first_rcrd_rcvd",
+      "label": "First Rcrd Rcvd",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__last_clm_reviewed",
+      "label": "Last Clm Reviewed",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__closed_date",
+      "label": "Closed Date",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__edit_impl_dt",
+      "label": "Edit Impl Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__edit_term_dt",
+      "label": "Edit Term Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__smpl_clm_cnt",
+      "label": "Smpl Clm Cnt",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__review_clm_cnt",
+      "label": "Review Clm Cnt",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__review_result_code",
+      "label": "Review Result Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__close_actn_code",
+      "label": "Close Actn Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__status",
+      "label": "Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__created_by",
+      "label": "Created By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__created_dts",
+      "label": "Created Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__updated_by",
+      "label": "Updated By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__updated_dts",
+      "label": "Updated Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__dept",
+      "label": "Dept",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__billing_ptan",
+      "label": "Billing Ptan",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__rendering_ptan",
+      "label": "Rendering Ptan",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__state_cd",
+      "label": "State Cd",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__edit_number",
+      "label": "Edit Number",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__contract_id",
+      "label": "Contract Id",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__case_file_comment",
+      "label": "Case File Comment",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__mip_cntrl_nbr",
+      "label": "Mip Cntrl Nbr",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__adhoc_name",
+      "label": "Adhoc Name",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__cost_center",
+      "label": "Cost Center",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__case_file_status",
+      "label": "Case File Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__mip_mtg_date",
+      "label": "Mip Mtg Date",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__mip_priority_score",
+      "label": "Mip Priority Score",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__npi",
+      "label": "Npi",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__activity_code",
+      "label": "Activity Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__referral_dept",
+      "label": "Referral Dept",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cd__referral_desc",
+      "label": "Referral Desc",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    }
+  ],
+  "Claim Details": [
+    {
+      "key": "cl__claim_details_id",
+      "label": "Claim Details Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__bene_first_name",
+      "label": "Bene First Name",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__bene_last_name",
+      "label": "Bene Last Name",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__bene_middle_name",
+      "label": "Bene Middle Name",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__bene_dob",
+      "label": "Bene Dob",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "mbi",
+      "label": "Mbi",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "claim_number",
+      "label": "Claim Number",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__lob",
+      "label": "Lob",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__hcpc_code",
+      "label": "Hcpc Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__dos_from",
+      "label": "Dos From",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__dos_to",
+      "label": "Dos To",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "claim_status",
+      "label": "Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__created_by",
+      "label": "Created By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__created_dts",
+      "label": "Created Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__updated_by",
+      "label": "Updated By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__updated_dts",
+      "label": "Updated Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__case_id",
+      "label": "Case Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__ptan",
+      "label": "Ptan",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__npi",
+      "label": "Npi",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__hic",
+      "label": "Hic",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__appeals_case_re_open",
+      "label": "Appeals Case Re Open",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__post_mr_actual_reimb_amount",
+      "label": "Post Mr Actual Reimb Amount",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__pre_mr_actual_reimb_amount",
+      "label": "Pre Mr Actual Reimb Amount",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__error_indicator",
+      "label": "Error Indicator",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__mcs_or_fiss_update",
+      "label": "Mcs Or Fiss Update",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "over_payment",
+      "label": "Over Payment",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__paid_dt",
+      "label": "Paid Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__ract_dt",
+      "label": "Ract Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__mcs_or_fiss_err_msg",
+      "label": "Mcs Or Fiss Err Msg",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__mcs_or_fiss_update_dt",
+      "label": "Mcs Or Fiss Update Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__type_of_bill",
+      "label": "Type Of Bill",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__adjustment_claim_number",
+      "label": "Adjustment Claim Number",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__patient_status",
+      "label": "Patient Status",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__place_of_service_zip_code",
+      "label": "Place Of Service Zip Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__claim_refresh",
+      "label": "Claim Refresh",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__claim_refresh_dt",
+      "label": "Claim Refresh Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__place_of_service_state_code",
+      "label": "Place Of Service State Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__mcs_snap_claims_ovr_txn_number",
+      "label": "Mcs Snap Claims Ovr Txn Number",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__mcs_snap_claims_ovr_txn_status",
+      "label": "Mcs Snap Claims Ovr Txn Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    }
+  ],
+  "Provider Fields": [
+    {
+      "key": "p__provider_details_id",
+      "label": "Provider Details Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "provider_number",
+      "label": "Provider Number (PTAN)",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__npi",
+      "label": "Npi",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__lob",
+      "label": "Lob",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__jurisdiction",
+      "label": "Jurisdiction",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__contract_id",
+      "label": "Contract Id",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__state_cd",
+      "label": "State Cd",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__provider_type",
+      "label": "Provider Type",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__status",
+      "label": "Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__created_by",
+      "label": "Created By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__created_dts",
+      "label": "Created Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__updated_by",
+      "label": "Updated By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__updated_dts",
+      "label": "Updated Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "provider_name",
+      "label": "Provider Name",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__specialty",
+      "label": "Specialty",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "p__case_details_id",
+      "label": "Case Details Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    }
+  ],
+  "Claim Decision Fields": [
+    {
+      "key": "d__claim_decision_id",
+      "label": "Claim Decision Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__claim_details_id",
+      "label": "Claim Details Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "qc_review_status",
+      "label": "Decision Type",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__decision_date",
+      "label": "Decision Date",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__associated_dcn",
+      "label": "Associated Dcn",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__denial_reason",
+      "label": "Denial Reason",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__decision_remarks",
+      "label": "Decision Remarks",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "qc_status",
+      "label": "Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "reviewed_by",
+      "label": "Created By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__created_dts",
+      "label": "Created Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__updated_by",
+      "label": "Updated By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__updated_dts",
+      "label": "Updated Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "qc_review",
+      "label": "Qc Review",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "qc_review_comment",
+      "label": "Qc Review Comments",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "reviewed_dts",
+      "label": "Qc Review Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__denial_remarks",
+      "label": "Denial Remarks",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__demand_bill",
+      "label": "Demand Bill",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__generic_reason_code",
+      "label": "Generic Reason Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__decision_pretext",
+      "label": "Decision Pretext",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "d__decision_comments",
+      "label": "Decision Comments",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    }
+  ],
+  "Focus Details": [
+    {
+      "key": "f__focus_code_details_id",
+      "label": "Focus Code Details Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__case_details_id",
+      "label": "Case Details Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__focus_cd_desc",
+      "label": "Focus Cd Desc",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__focus_cd_type",
+      "label": "Focus Cd Type",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__modifier",
+      "label": "Modifier",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__cart_cd",
+      "label": "Cart Cd",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__cart_topic",
+      "label": "Cart Topic",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__rec_clms_review",
+      "label": "Rec Clms Review",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__smpl_clm_cnt",
+      "label": "Smpl Clm Cnt",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "focus_code",
+      "label": "Focus Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__status",
+      "label": "Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__created_by",
+      "label": "Created By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__created_dts",
+      "label": "Created Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__updated_by",
+      "label": "Updated By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "f__updated_dts",
+      "label": "Updated Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    }
+  ]
+}
