@@ -1,5 +1,4 @@
 SELECT
-    c.case_id AS c__case_id,
     c.revision AS c__revision,
     c.case_details_id AS c__case_details_id,
     c.lob AS c__lob,

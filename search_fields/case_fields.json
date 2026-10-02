@@ -3,23 +3,6 @@
   "order": 10,
   "fields": [
     {
-      "key": "c__case_id",
-      "label": "Case Id",
-      "type": "number",
-      "operators": [
-        "Equals",
-        "Greater than",
-        "Less than",
-        "At least",
-        "At most",
-        "Is empty",
-        "Is not empty"
-      ],
-      "result_groups": [
-        "cases"
-      ]
-    },
-    {
       "key": "c__revision",
       "label": "Revision",
       "type": "number",
