@@ -1,2 +1,2 @@
-gradio>=5.49.1,<6
+streamlit>=1.51,<2
 oracledb>=2,<4

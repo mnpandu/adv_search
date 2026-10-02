@@ -2,7 +2,7 @@ import csv
 from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
 
-import gradio as gr
+import streamlit as st
 from database import fetch_records
 from db_config import get_settings
 
@@ -18,54 +18,6 @@ FIELD_LABELS = {
     for field_key, label, _field_type in fields
 }
 MATCH_MODES = ["Match all (AND)", "Match any (OR)"]
-
-SAMPLE_RECORDS = [
-    {
-        "case_number": "5001001",
-        "mbi": "MBR-1042",
-        "provider_name": "Northside Clinic",
-        "claim_number": "CLM-1001",
-        "claim_status": "Finalized",
-        "qc_status": "Completed",
-        "qc_review_status": "Agree",
-        "qc_review": "Agree",
-        "qc_review_comment": "Completed",
-        "focus_code": ["Coding"],
-        "over_payment": 2.5,
-        "reviewed_by": "pandu",
-        "reviewed_dts": "2026-04-10",
-    },
-    {
-        "case_number": "5001001",
-        "mbi": "MBR-1042",
-        "provider_name": "Northside Clinic",
-        "claim_number": "CLM-1002",
-        "claim_status": "Pending",
-        "qc_status": "Returned for Corrections",
-        "qc_review_status": "Returned for Corrections",
-        "qc_review": "Action Required",
-        "qc_review_comment": "Return for Correction",
-        "focus_code": ["Clinical Determination", "Coding"],
-        "over_payment": 4,
-        "reviewed_by": "regine",
-        "reviewed_dts": "2026-04-12",
-    },
-    {
-        "case_number": "5002007",
-        "mbi": "MBR-2088",
-        "provider_name": "Lakeshore Medical",
-        "claim_number": "CLM-2044",
-        "claim_status": "Finalized",
-        "qc_status": "Completed",
-        "qc_review_status": "Agree",
-        "qc_review": "Re-review",
-        "qc_review_comment": "Complete",
-        "focus_code": ["Other"],
-        "over_payment": 1.5,
-        "reviewed_by": "pandu",
-        "reviewed_dts": "2026-05-02",
-    },
-]
 
 RESULT_FIELDS = [
     "case_number",
@@ -400,272 +352,225 @@ def _run_saved_search(search, backend=None):
     return _search(keys, match_mode, values, backend)
 
 
-def create_app(backend=None):
-    backend = get_settings(backend)["backend"]
-    saved_search_secret = "adv-search-saved-searches-v1"
-    with gr.Blocks(title="Advanced Search", css="""
-        .app-shell { max-width: 1600px; margin: 0 auto; }
-        .search-sidebar { flex: 0 0 300px !important; min-width: 280px !important;
-            max-width: 340px; max-height: 85vh; overflow-y: auto;
-            background: #f5f6f8; padding: 12px; }
-        .search-main { min-width: 0; }
-        .sidebar-group {
-            flex: 0 0 auto !important;
-            border: 0 !important;
-            border-bottom: 1px solid #dfe3e8 !important;
-            border-radius: 0 !important;
-            background: transparent !important;
-            width: 100%;
-        }
-        .field-actions {
-            display: flex !important;
-            flex-direction: row !important;
-            gap: 8px !important;
-        }
-        .field-actions > * {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-        }
-        .field-actions button {
-            min-height: 34px;
-            padding: 6px 8px !important;
-            font-size: 0.85rem;
-        }
-        .saved-searches-panel {
-            width: 100%;
-            border-bottom: 1px solid #dfe3e8;
-            padding: 0 0 10px;
-        }
-        .saved-searches-heading {
-            margin: 4px 0 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        .saved-query-row {
-            align-items: center !important;
-            flex-wrap: nowrap !important;
-            gap: 4px !important;
-        }
-        .saved-query-row > :first-child {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-        }
-        .saved-query-row > :not(:first-child) {
-            flex: 0 0 auto !important;
-            min-width: 0 !important;
-        }
-        .saved-query-row button:first-child {
-            flex: 1 1 auto !important;
-            min-width: 0 !important;
-            justify-content: flex-start !important;
-            text-align: left !important;
-            overflow: hidden;
-        }
-        .saved-query-row button:not(:first-child) {
-            flex: 0 0 auto !important;
-            min-width: 48px;
-            white-space: nowrap !important;
-            padding: 5px 6px !important;
-            font-size: 0.75rem;
-        }
-        .saved-searches-empty {
-            color: #71717a;
-            font-size: 0.85rem;
-        }
-        .sidebar-group > button {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            white-space: nowrap !important;
-            align-items: center !important;
-            justify-content: space-between !important;
-            padding: 10px 8px !important;
-            font-weight: 600;
-            text-align: left;
-        }
-        .sidebar-group > button span { white-space: nowrap !important; }
-        .sidebar-group > button:hover { background: #e9eef8; }
-        .search-sidebar {
-            display: flex !important;
-            flex-direction: column !important;
-            flex-wrap: nowrap !important;
-        }
-        .search-sidebar .field-checklist [data-testid="checkbox-group"] {
-            display: grid !important;
-            grid-template-columns: minmax(0, 1fr) !important;
-            grid-auto-flow: row !important;
-            width: 100% !important;
-            gap: 4px !important;
-        }
-        .field-checklist label {
-            display: flex !important;
-            width: 100% !important;
-            box-sizing: border-box;
-            margin: 0 !important;
-            align-items: center !important;
-            gap: 8px !important;
-            padding: 6px 8px !important;
-            justify-content: flex-start !important;
-        }
-        .field-checklist label span { white-space: normal; overflow-wrap: anywhere; }
-        .filter-row { border-bottom: 1px solid #dfe3e8; padding: 8px 0; }
-        @media (max-width: 760px) {
-            .search-layout { flex-direction: column !important; }
-            .search-sidebar { flex: auto !important; max-width: none; max-height: none; }
-        }
-        """) as demo:
-        with gr.Column(elem_classes="app-shell"):
-            gr.Markdown("# Advanced Search")
-            with gr.Row(elem_classes="search-layout"):
-                with gr.Column(scale=1, elem_classes="search-sidebar"):
-                    gr.Markdown("### Select fields")
-                    with gr.Row(elem_classes="field-actions"):
-                        expand = gr.Button("Expand all", size="sm")
-                        collapse = gr.Button("Collapse all", size="sm")
-                    saved_search_state = gr.BrowserState(
-                        default_value=[],
-                        storage_key="adv-search-saved-searches-v2",
-                        secret=saved_search_secret,
+def _apply_saved_search(search):
+    saved = _normalize_saved_search(search)
+    if saved is None:
+        return
+
+    restored = _restore_saved_search(saved)
+    selections, match_mode = restored[:-2], restored[-2]
+    for (group, _fields), selected in zip(SIDEBAR_FIELD_GROUPS.items(), selections):
+        st.session_state[f"selected_fields::{group}"] = selected
+
+    for field_key in FIELD_LABELS:
+        _clear_field_widget_state(field_key)
+    for criterion in saved["criteria"]:
+        field_key = criterion["field"]
+        operator = criterion["operator"]
+        st.session_state[f"operator::{field_key}"] = operator
+        value = criterion["value"]
+        if FIELD_TYPES[field_key] == "date" and value is not None and operator != "Within last (days)":
+            value = date.fromisoformat(str(value)[:10])
+        st.session_state[f"value::{field_key}::{operator}"] = value
+
+    st.session_state["match_mode"] = match_mode
+    st.session_state["saved_search_name"] = saved["name"]
+
+
+def _run_query(selected_fields, match_mode, field_values):
+    try:
+        st.session_state["search_result"] = _search(
+            selected_fields, match_mode, field_values, "oracle"
+        )
+        st.session_state["search_error"] = None
+    except Exception as exc:
+        st.session_state["search_result"] = None
+        st.session_state["search_error"] = str(exc)
+
+
+def _clear_field_widget_state(field_key):
+    st.session_state.pop(f"operator::{field_key}", None)
+    value_prefix = f"value::{field_key}::"
+    for state_key in list(st.session_state):
+        if state_key.startswith(value_prefix):
+            st.session_state.pop(state_key, None)
+
+
+def main():
+    st.set_page_config(page_title="Advanced Search", layout="wide")
+    st.title("Advanced Search")
+
+    state_defaults = {
+        "saved_searches": [],
+        "match_mode": MATCH_MODES[0],
+        "expand_field_groups": False,
+        "search_result": None,
+        "search_error": None,
+    }
+    for state_key, default in state_defaults.items():
+        if state_key not in st.session_state:
+            st.session_state[state_key] = default
+
+    saved_searches = _validated_saved_searches(st.session_state["saved_searches"])
+    st.session_state["saved_searches"] = saved_searches
+
+    with st.sidebar:
+        st.subheader("Saved searches")
+        if not saved_searches:
+            st.caption("No saved searches in this session.")
+        for sequence, saved in enumerate(saved_searches, start=1):
+            load_col, run_col, remove_col = st.columns([5, 1, 1])
+            if load_col.button(
+                f"{sequence}. {saved['name']}",
+                key=f"load_saved::{sequence}",
+                use_container_width=True,
+            ):
+                _apply_saved_search(saved)
+                st.rerun()
+            if run_col.button("Run", key=f"run_saved::{sequence}"):
+                _run_query(*_saved_search_values(saved))
+                st.rerun()
+            if remove_col.button("Remove", key=f"remove_saved::{sequence}"):
+                st.session_state["saved_searches"] = _delete_saved_search(
+                    saved_searches, saved["name"]
+                )
+                st.rerun()
+
+        st.text_input(
+            "Search name",
+            placeholder="e.g. Open cases, last 90 days",
+            max_chars=80,
+            key="saved_search_name",
+        )
+        st.caption("Saved searches are kept for this active session.")
+
+        expand_col, collapse_col = st.columns(2)
+        if expand_col.button("Expand all", use_container_width=True):
+            st.session_state["expand_field_groups"] = True
+            st.rerun()
+        if collapse_col.button("Collapse all", use_container_width=True):
+            st.session_state["expand_field_groups"] = False
+            st.rerun()
+
+        if st.button("Clear selections", use_container_width=True):
+            for group in SIDEBAR_FIELD_GROUPS:
+                st.session_state[f"selected_fields::{group}"] = []
+            for field_key in FIELD_LABELS:
+                _clear_field_widget_state(field_key)
+            st.session_state["match_mode"] = MATCH_MODES[0]
+            st.session_state["search_result"] = None
+            st.session_state["search_error"] = None
+            st.rerun()
+
+        st.divider()
+        st.subheader("Select fields")
+        for group, fields in SIDEBAR_FIELD_GROUPS.items():
+            with st.expander(group, expanded=st.session_state["expand_field_groups"]):
+                st.multiselect(
+                    "Fields",
+                    options=[field_key for field_key, _label, _kind in fields],
+                    format_func=lambda field_key: FIELD_LABELS[field_key],
+                    key=f"selected_fields::{group}",
+                    label_visibility="collapsed",
+                    placeholder="Choose fields",
+                )
+
+    selected_fields = [
+        field_key
+        for group in SIDEBAR_FIELD_GROUPS
+        for field_key in st.session_state.get(f"selected_fields::{group}", [])
+    ]
+
+    st.subheader("Selected filters")
+    st.radio("Match records", MATCH_MODES, horizontal=True, key="match_mode")
+
+    field_values = []
+    if selected_fields:
+        for field_key in selected_fields:
+            field_type = FIELD_TYPES[field_key]
+            operator_key = f"operator::{field_key}"
+            operators = _operators_for_field(field_key)
+            if st.session_state.get(operator_key) not in operators:
+                st.session_state[operator_key] = operators[0]
+            operator = st.session_state[operator_key]
+            value_key = f"value::{field_key}::{operator}"
+
+            with st.container(border=True):
+                field_col, operator_col, value_col = st.columns([2, 2, 3])
+                field_col.markdown(f"**{FIELD_LABELS[field_key]}**")
+                operator = operator_col.selectbox(
+                    "Operator", operators, key=operator_key
+                )
+
+                if operator in {"Is empty", "Is not empty"}:
+                    value = None
+                    value_col.caption("No value required")
+                elif field_type == "number":
+                    value = value_col.number_input(
+                        "Value", value=st.session_state.get(value_key), key=value_key
                     )
-                    loaded_search_state = gr.State({"search": None, "revision": 0})
-                    with gr.Column(elem_classes="saved-searches-panel"):
-                        gr.Markdown("Saved searches", elem_classes="saved-searches-heading")
-                        saved_search_name = gr.Textbox(
-                            label="Search name",
-                            placeholder="e.g. Open cases, last 90 days",
-                            max_length=80,
-                        )
-                        save_status = gr.Markdown()
-                        with gr.Column() as saved_search_list:
-                            pass
-                    groups, selectors = [], []
-                    for group, fields in SIDEBAR_FIELD_GROUPS.items():
-                        with gr.Accordion(group, open=False, elem_classes="sidebar-group") as accordion:
-                            selector = gr.CheckboxGroup(
-                                choices=[(label, key) for key, label, kind in fields],
-                                value=[], show_label=False, elem_classes="field-checklist")
-                        groups.append(accordion)
-                        selectors.append(selector)
-                    with saved_search_list:
-                        @gr.render(inputs=saved_search_state)
-                        def render_saved_searches(saved_searches):
-                            valid_searches = [
-                                normalized
-                                for item in (saved_searches or [])
-                                if (normalized := _normalize_saved_search(item)) is not None
-                            ]
-                            if not valid_searches:
-                                gr.Markdown("No saved searches yet.", elem_classes="saved-searches-empty")
-                            for sequence, saved in enumerate(valid_searches, start=1):
-                                with gr.Row(elem_classes="saved-query-row", key="saved_" + saved["name"]):
-                                    load = gr.Button(f"{sequence}. {saved['name']}", size="sm")
-                                    run = gr.Button("Run", size="sm")
-                                    remove = gr.Button("Remove", size="sm")
-                                load.click(
-                                    lambda current, active, item=saved: _load_saved_search(
-                                        current, active, item["name"]
-                                    ),
-                                    inputs=[saved_search_state, loaded_search_state],
-                                    outputs=[*selectors, match_mode, loaded_search_state, saved_search_name],
-                                )
-                                run.click(
-                                    lambda item=saved: _run_saved_search(item, backend),
-                                    outputs=[summary, results, preview],
-                                )
-                                remove.click(
-                                    lambda current, name=saved["name"]: _delete_saved_search(current, name),
-                                    inputs=saved_search_state,
-                                    outputs=saved_search_state,
-                                )
-                    clear = gr.Button("Clear selections")
-                with gr.Column(scale=4, elem_classes="search-main"):
-                    gr.Markdown("### Selected filters")
-                    match_mode = gr.Radio(choices=MATCH_MODES,
-                                          value="Match all (AND)", interactive=True,
-                                          label="Match records")
-                    summary = gr.Markdown("Select fields on the left to choose their operators here.")
-                    preview = gr.Textbox(label="Search criteria", interactive=False)
-                    # Define output first so dynamic callbacks can reference it.
-                    results = gr.Dataframe(headers=RESULT_HEADERS,
-                                           datatype=["str"] * len(RESULT_HEADERS),
-                                           value=[], interactive=False, wrap=True, render=False)
-                    @gr.render(inputs=[*selectors, loaded_search_state])
-                    def render_filters(*render_inputs):
-                        selections = render_inputs[:len(selectors)]
-                        loaded_state = render_inputs[-1] if render_inputs else None
-                        loaded = (loaded_state or {}).get("search") if isinstance(loaded_state, dict) else None
-                        revision = (loaded_state or {}).get("revision", 0) if isinstance(loaded_state, dict) else 0
-                        saved_criteria = {
-                            item["field"]: item
-                            for item in (loaded or {}).get("criteria", [])
-                        }
-                        keys = [key for selected in selections for key in (selected or [])]
-                        controls = []
-                        for key in keys:
-                            kind = FIELD_TYPES[key]
-                            saved_criterion = saved_criteria.get(key, {})
-                            with gr.Row(elem_classes="filter-row", key=("row_" + key, revision)):
-                                gr.Textbox(value=FIELD_LABELS[key], label="Field", interactive=False,
-                                           scale=2, key=("label_" + key, revision))
-                                choices = _operators_for_field(key)
-                                operator = gr.Dropdown(
-                                    choices=choices,
-                                    value=saved_criterion.get("operator", choices[0]),
-                                    label="Operator",
-                                    scale=2,
-                                    key=("operator_" + key, revision),
-                                )
-                                value = saved_criterion.get("value")
-                                if kind == "number":
-                                    value_control = gr.Number(
-                                        label="Value",
-                                        value=value,
-                                        key=("value_" + key, revision),
-                                        scale=3,
-                                    )
-                                else:
-                                    value_control = gr.Textbox(
-                                        label="Value",
-                                        value="" if value is None else str(value),
-                                        key=("value_" + key, revision),
-                                        scale=3,
-                                        placeholder=("YYYY-MM-DD or days" if kind == "date"
-                                                     else "For In: 222, 2111"),
-                                    )
-                            controls.extend([operator, value_control])
-                        with gr.Row():
-                            search = gr.Button("Search", variant="primary", key=("search", revision))
-                            save_search = gr.Button(
-                                "Save search",
-                                interactive=bool(keys),
-                                key=("save_search", revision),
-                            )
-                        def submit(mode, *values):
-                            return _search(keys, mode, values, backend)
-                        search.click(submit, inputs=[match_mode, *controls], outputs=[summary, results, preview])
-                        def save_current(saved, name, mode, *values):
-                            selected_groups = values[:len(selectors)]
-                            filter_values = values[len(selectors):]
-                            updated, message = _save_current_search(
-                                saved, name, mode, selected_groups, filter_values
-                            )
-                            return updated, message
-                        save_search.click(
-                            save_current,
-                            inputs=[saved_search_state, saved_search_name, match_mode, *selectors, *controls],
-                            outputs=[saved_search_state, save_status],
-                        )
-                    gr.Markdown("### Results")
-                    results.render()
-                expand.click(lambda: [gr.update(open=True) for _ in groups], outputs=groups)
-                collapse.click(lambda: [gr.update(open=False) for _ in groups], outputs=groups)
-                clear.click(lambda: [*([[] for _ in selectors]), "Selections cleared.", [], ""],
-                            outputs=[*selectors, summary, results, preview])
-    return demo
+                elif field_type == "date" and operator == "Within last (days)":
+                    if value_key not in st.session_state:
+                        st.session_state[value_key] = 90
+                    value = value_col.number_input(
+                        "Days", min_value=0, step=1, key=value_key
+                    )
+                elif field_type == "date":
+                    current_value = st.session_state.get(value_key)
+                    if isinstance(current_value, str):
+                        current_value = date.fromisoformat(current_value[:10])
+                    value = value_col.date_input(
+                        "Date", value=current_value, key=value_key
+                    )
+                else:
+                    value = value_col.text_input(
+                        "Value",
+                        placeholder="For In: 222, 2111",
+                        key=value_key,
+                    )
+            field_values.extend([operator, value])
+    else:
+        st.info("Choose one or more fields from the sidebar to build a search.")
+
+    search_col, save_col = st.columns([1, 1])
+    with search_col:
+        if st.button("Search", type="primary", disabled=not selected_fields):
+            _run_query(selected_fields, st.session_state["match_mode"], field_values)
+    with save_col:
+        if st.button("Save search", disabled=not selected_fields):
+            updated, message = _save_current_search(
+                saved_searches,
+                st.session_state.get("saved_search_name", ""),
+                st.session_state["match_mode"],
+                [st.session_state.get(f"selected_fields::{group}", [])
+                 for group in SIDEBAR_FIELD_GROUPS],
+                field_values,
+            )
+            st.session_state["saved_searches"] = updated
+            if message.startswith("Saved "):
+                st.success(message)
+                st.rerun()
+            else:
+                st.warning(message)
+
+    if st.session_state.get("search_error"):
+        st.error(f"Search failed: {st.session_state['search_error']}")
+    result = st.session_state.get("search_result")
+    if result:
+        summary, rows, query_text = result
+        st.subheader("Results")
+        st.metric("Matching records", summary.split(" ", 1)[0])
+        if query_text:
+            st.caption(query_text)
+        if rows:
+            st.dataframe(
+                [dict(zip(RESULT_HEADERS, row)) for row in rows],
+                hide_index=True,
+                width="stretch",
+            )
+        else:
+            st.info("No records matched this search.")
 
 
 if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--db", choices=["oracle"], default="oracle")
-    args = parser.parse_args()
-    create_app(args.db).launch(server_name="127.0.0.1", share=True)
+    main()

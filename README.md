@@ -10,7 +10,7 @@ $env:ORACLE_USER = '<oracle username>'
 $env:ORACLE_PASSWORD = '<oracle password>'
 $env:ORACLE_DSN = 'db-host:1521/service_name'
 $env:ORACLE_SCHEMA = $env:ORACLE_USER
-python app.py
+python -m streamlit run app.py
 ```
 
 `ORACLE_SCHEMA` is optional when the table owner is the same as `ORACLE_USER`. The
@@ -42,5 +42,5 @@ application. It does not perform DDL.
 
 Text `In` filters accept comma-separated values, such as `222, 2111`. Quote a value
 containing a comma, for example `"Clinic, Inc", Other`. Date fields support a rolling
-`Within last (days)` range such as 90 days. Named saved searches are stored in the
-current browser.
+`Within last (days)` range such as 90 days. Named saved searches are kept in the
+active Streamlit session and are cleared when that session ends.
