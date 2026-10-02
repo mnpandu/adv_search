@@ -544,7 +544,8 @@ def main():
             value_key = f"value::{field_key}::{operator}"
 
             with st.container(border=True):
-                field_col, operator_col, value_col = st.columns([2, 2, 3])
+                field_col, operator_col, value_col = st.columns([3, 2, 5])
+                field_col.markdown("Field")
                 field_col.markdown(f"**{FIELD_LABELS[field_key]}**")
                 operator = operator_col.selectbox(
                     "Operator", operators, key=operator_key
