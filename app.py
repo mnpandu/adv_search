@@ -228,17 +228,34 @@ def create_app(backend=None):
             background: #f5f6f8; padding: 12px; }
         .search-main { min-width: 0; }
         .sidebar-group {
+            flex: 0 0 auto !important;
             border: 0 !important;
             border-bottom: 1px solid #dfe3e8 !important;
             border-radius: 0 !important;
             background: transparent !important;
             width: 100%;
         }
+        .field-actions {
+            display: flex !important;
+            flex-direction: row !important;
+            gap: 8px !important;
+        }
+        .field-actions > * {
+            flex: 1 1 0 !important;
+            min-width: 0 !important;
+        }
+        .field-actions button {
+            min-height: 34px;
+            padding: 6px 8px !important;
+            font-size: 0.85rem;
+        }
         .sidebar-group > button {
             display: flex !important;
             flex-wrap: nowrap !important;
             white-space: nowrap !important;
-            padding: 12px 8px !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 10px 8px !important;
             font-weight: 600;
             text-align: left;
         }
@@ -261,6 +278,9 @@ def create_app(backend=None):
             width: 100% !important;
             box-sizing: border-box;
             margin: 0 !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 6px 8px !important;
             justify-content: flex-start !important;
         }
         .field-checklist label span { white-space: normal; overflow-wrap: anywhere; }
@@ -274,8 +294,8 @@ def create_app(backend=None):
             gr.Markdown("# Advanced Search")
             with gr.Row(elem_classes="search-layout"):
                 with gr.Column(scale=1, elem_classes="search-sidebar"):
-                    gr.Markdown("### Fields")
-                    with gr.Row():
+                    gr.Markdown("### Select fields")
+                    with gr.Row(elem_classes="field-actions"):
                         expand = gr.Button("Expand all", size="sm")
                         collapse = gr.Button("Collapse all", size="sm")
                     groups, selectors = [], []
