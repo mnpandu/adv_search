@@ -1,0 +1,566 @@
+{
+  "category": "Claim Details",
+  "order": 30,
+  "fields": [
+    {
+      "key": "cl__claim_details_id",
+      "label": "Claim Details Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__bene_first_name",
+      "label": "Bene First Name",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__bene_last_name",
+      "label": "Bene Last Name",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__bene_middle_name",
+      "label": "Bene Middle Name",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__bene_dob",
+      "label": "Bene Dob",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "mbi",
+      "label": "Mbi",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "claim_number",
+      "label": "Claim Number",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__lob",
+      "label": "Lob",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__hcpc_code",
+      "label": "Hcpc Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__dos_from",
+      "label": "Dos From",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__dos_to",
+      "label": "Dos To",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "claim_status",
+      "label": "Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__created_by",
+      "label": "Created By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__created_dts",
+      "label": "Created Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__updated_by",
+      "label": "Updated By",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__updated_dts",
+      "label": "Updated Dts",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__case_id",
+      "label": "Case Id",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__ptan",
+      "label": "Ptan",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__npi",
+      "label": "Npi",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__hic",
+      "label": "Hic",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__appeals_case_re_open",
+      "label": "Appeals Case Re Open",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__post_mr_actual_reimb_amount",
+      "label": "Post Mr Actual Reimb Amount",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__pre_mr_actual_reimb_amount",
+      "label": "Pre Mr Actual Reimb Amount",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__error_indicator",
+      "label": "Error Indicator",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__mcs_or_fiss_update",
+      "label": "Mcs Or Fiss Update",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "over_payment",
+      "label": "Over Payment",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__paid_dt",
+      "label": "Paid Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__ract_dt",
+      "label": "Ract Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__mcs_or_fiss_err_msg",
+      "label": "Mcs Or Fiss Err Msg",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__mcs_or_fiss_update_dt",
+      "label": "Mcs Or Fiss Update Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__type_of_bill",
+      "label": "Type Of Bill",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__adjustment_claim_number",
+      "label": "Adjustment Claim Number",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__patient_status",
+      "label": "Patient Status",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__place_of_service_zip_code",
+      "label": "Place Of Service Zip Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__claim_refresh",
+      "label": "Claim Refresh",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__claim_refresh_dt",
+      "label": "Claim Refresh Dt",
+      "type": "date",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__place_of_service_state_code",
+      "label": "Place Of Service State Code",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__mcs_snap_claims_ovr_txn_number",
+      "label": "Mcs Snap Claims Ovr Txn Number",
+      "type": "number",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "key": "cl__mcs_snap_claims_ovr_txn_status",
+      "label": "Mcs Snap Claims Ovr Txn Status",
+      "type": "text",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    }
+  ]
+}

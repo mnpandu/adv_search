@@ -44,11 +44,14 @@ The environment settings are:
 
 ## Search Configuration
 
-`search_fields.json` defines each field's group, result alias, label, type, and allowed
-operators. Edit it to add, remove, or rename fields and change their operators, then
-restart the app. A field key must match a column alias in `search_oracle.sql`. The query
-joins the configured Oracle tables and returns up to 10,000 rows for filtering in the
-application. It does not perform DDL.
+Each category has its own JSON file in `search_fields/` (for example,
+`case_fields.json` or `claim_details.json`). Edit that category file to add, remove, or
+rename fields and change their operators. The `order` value controls category order.
+Restart the app to reload the files. Every field key must match a column alias in
+`search_oracle.sql`. Result grid columns are configured separately in `app.py` using
+`CASE_RESULT_FIELDS` and `CLAIM_RESULT_FIELDS`. The query joins the configured Oracle
+tables and returns up to 10,000 rows for filtering in the application. It does not
+perform DDL.
 
 Text `In` filters accept comma-separated values, such as `222, 2111`. Quote a value
 containing a comma, for example `"Clinic, Inc", Other`. Date fields support a rolling
