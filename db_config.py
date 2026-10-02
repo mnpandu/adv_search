@@ -1,30 +1,41 @@
-"""Edit defaults here, or override them using environment variables."""
+"""Oracle connection settings, supplied through environment variables."""
 import os
 
-DEFAULT_DB = "postgres"
+DEFAULT_DB = "oracle"
 
-PROFILES = {
-    "postgres": {
-        "host": "localhost", "port": "5432", "database": "postgres",
-        "user": "postgres", "schema": "pic_master1",
-        "case_table": "case_header", "case_details_table": "case_details", "claim_table": "claim_details",
-        "decision_table": "claim_decision",
-        "provider_table": "provider_details", "focus_table": "focus_code_details",
-    },
-
+TABLE_DEFAULTS = {
+    "case_table": "case_header",
+    "case_details_table": "case_details",
+    "claim_table": "claim_details",
+    "decision_table": "claim_decision",
+    "provider_table": "provider_details",
+    "focus_table": "focus_code_details",
 }
 
 
 def get_settings(backend=None):
-    backend = (backend or os.getenv("DB_TYPE") or DEFAULT_DB).lower()
-    if backend not in PROFILES:
-        raise ValueError("Only postgres is supported")
-    prefix = "PG"
-    names = {"database": "DATABASE"}
+    selected_backend = (backend or DEFAULT_DB).lower()
+    if selected_backend != "oracle":
+        raise ValueError("Only Oracle is supported")
+
     settings = {
-        key: os.getenv(prefix + names.get(key, key.upper()), value)
-        for key, value in PROFILES[backend].items()
+        "backend": "oracle",
+        "dsn": os.getenv("ORACLE_DSN"),
+        "user": os.getenv("ORACLE_USER"),
+        "password": os.getenv("ORACLE_PASSWORD"),
+        "schema": os.getenv("ORACLE_SCHEMA") or os.getenv("ORACLE_USER"),
     }
-    settings["backend"] = backend
-    settings["password"] = os.getenv(prefix + "PASSWORD")
+    settings.update({
+        key: os.getenv("ORACLE_" + key.upper(), default)
+        for key, default in TABLE_DEFAULTS.items()
+    })
+
+    missing = [key for key in ("dsn", "user", "password") if not settings[key]]
+    if missing:
+        required = {"dsn": "ORACLE_DSN", "user": "ORACLE_USER", "password": "ORACLE_PASSWORD"}
+        raise ValueError("Set the Oracle connection environment variables: " + ", ".join(
+            required[key] for key in missing
+        ))
+    if not settings["schema"]:
+        raise ValueError("Set ORACLE_SCHEMA or ORACLE_USER to identify the table owner")
     return settings

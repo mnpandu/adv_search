@@ -666,6 +666,6 @@ def create_app(backend=None):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--db", choices=["postgres"], default=None)
+    parser.add_argument("--db", choices=["oracle"], default="oracle")
     args = parser.parse_args()
     create_app(args.db).launch(server_name="127.0.0.1", share=True)

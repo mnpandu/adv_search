@@ -1,4 +1,4 @@
-"""Read PostgreSQL records for advanced search."""
+"""Read Oracle records for advanced search."""
 import re
 from pathlib import Path
 
@@ -15,15 +15,16 @@ def build_query(settings):
         if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", value):
             raise ValueError(f"Invalid database identifier: {key}")
         identifiers[key] = value
-    return (ROOT / f"search_{settings['backend']}.sql").read_text().format(**identifiers)
+    return (ROOT / "search_oracle.sql").read_text(encoding="utf-8").format(**identifiers)
 
 
 def connect_db(settings):
-    import psycopg
-    return psycopg.connect(
-        host=settings["host"], port=settings["port"],
-        dbname=settings["database"], user=settings["user"],
-        password=settings["password"], connect_timeout=5,
+    import oracledb
+    return oracledb.connect(
+        dsn=settings["dsn"],
+        user=settings["user"],
+        password=settings["password"],
+        tcp_connect_timeout=5,
     )
 
 
@@ -42,8 +43,8 @@ def fetch_records(backend=None):
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Check connection and search-table mapping (read only)")
-    parser.add_argument("--db", choices=["postgres"])
+    parser = argparse.ArgumentParser(description="Check Oracle connection and search query (read only)")
+    parser.add_argument("--db", choices=["oracle"], default="oracle")
     args = parser.parse_args()
     records = fetch_records(args.db)
     print(f"Connection and table query succeeded: {len(records)} rows")
