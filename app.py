@@ -19,14 +19,29 @@ FIELD_LABELS = {
 }
 MATCH_MODES = ["Match all (AND)", "Match any (OR)"]
 
-RESULT_FIELDS = [
+CASE_RESULT_FIELDS = [
     "case_number",
+    "c__case_id",
+    "c__revision",
+    "c__case_status",
+    "c__case_substatus",
+    "c__status",
+    "c__assigned_to_name",
+    "c__lob",
+    "c__created_dts",
+    "c__closed_dts",
+]
+CLAIM_RESULT_FIELDS = [
+    "cl__claim_details_id",
+    "d__claim_decision_id",
+    "case_number",
+    "claim_number",
     "mbi",
     "provider_name",
     "provider_number",
-    "claim_number",
     "claim_status",
     "qc_status",
+    "qc_review_status",
     "qc_review",
     "qc_review_comment",
     "focus_code",
@@ -34,7 +49,30 @@ RESULT_FIELDS = [
     "reviewed_by",
     "reviewed_dts",
 ]
-RESULT_HEADERS = [FIELD_LABELS.get(field, field.replace("_", " ").title()) for field in RESULT_FIELDS]
+
+
+def _result_headers(field_keys):
+    return [FIELD_LABELS.get(key, key.replace("_", " ").title()) for key in field_keys]
+
+
+def _unique_records(records, key_fields):
+    unique = []
+    seen = set()
+    for record in records:
+        key = tuple(record.get(field) for field in key_fields)
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(record)
+    return unique
+
+
+def _result_rows(records, field_keys):
+    headers = _result_headers(field_keys)
+    return [
+        {header: _as_text(record.get(field_key)) for field_key, header in zip(field_keys, headers)}
+        for record in records
+    ]
 
 
 def _as_text(value):
@@ -338,11 +376,7 @@ def _search(selected_fields, match_mode, field_values, backend=None):
         f"{key} {match_operator.lower()} {_as_text(value)!r}"
         for key, match_operator, value in criteria
     )
-    rows = [
-        [_as_text(record.get(field_key)) for field_key in RESULT_FIELDS]
-        for record in records
-    ]
-    return f"{len(records)} matching records", rows, query_text
+    return f"{len(records)} matching joined rows", records, query_text
 
 
 def _run_saved_search(search, backend=None):
@@ -419,18 +453,32 @@ def main():
         if not saved_searches:
             st.caption("No saved searches in this session.")
         for sequence, saved in enumerate(saved_searches, start=1):
-            load_col, run_col, remove_col = st.columns([5, 1, 1])
+            load_col, run_col, remove_col = st.columns([3.5, 1.4, 1.5], gap="small")
             if load_col.button(
                 f"{sequence}. {saved['name']}",
                 key=f"load_saved::{sequence}",
-                use_container_width=True,
+                width="stretch",
             ):
                 _apply_saved_search(saved)
                 st.rerun()
-            if run_col.button("Run", key=f"run_saved::{sequence}"):
+            if run_col.button(
+                "Run",
+                key=f"run_saved::{sequence}",
+                help="Run this saved search",
+                icon=":material/play_arrow:",
+                type="secondary",
+                width="stretch",
+            ):
                 _run_query(*_saved_search_values(saved))
                 st.rerun()
-            if remove_col.button("Remove", key=f"remove_saved::{sequence}"):
+            if remove_col.button(
+                "Remove",
+                key=f"remove_saved::{sequence}",
+                help="Remove this saved search",
+                icon=":material/delete_outline:",
+                type="secondary",
+                width="stretch",
+            ):
                 st.session_state["saved_searches"] = _delete_saved_search(
                     saved_searches, saved["name"]
                 )
@@ -557,19 +605,36 @@ def main():
         st.error(f"Search failed: {st.session_state['search_error']}")
     result = st.session_state.get("search_result")
     if result:
-        summary, rows, query_text = result
+        summary, records, query_text = result
+        case_records = _unique_records(records, ("c__case_id", "c__revision"))
+        claim_records = _unique_records(records, ("cl__claim_details_id", "d__claim_decision_id"))
         st.subheader("Results")
-        st.metric("Matching records", summary.split(" ", 1)[0])
+        case_tab, claim_tab = st.tabs([
+            f"Cases ({len(case_records)})",
+            f"Claims ({len(claim_records)})",
+        ])
         if query_text:
             st.caption(query_text)
-        if rows:
-            st.dataframe(
-                [dict(zip(RESULT_HEADERS, row)) for row in rows],
-                hide_index=True,
-                width="stretch",
-            )
-        else:
-            st.info("No records matched this search.")
+        with case_tab:
+            st.caption("One row per matching case revision.")
+            if case_records:
+                st.dataframe(
+                    _result_rows(case_records, CASE_RESULT_FIELDS),
+                    hide_index=True,
+                    width="stretch",
+                )
+            else:
+                st.info("No cases matched this search.")
+        with claim_tab:
+            st.caption("One row per matching claim decision; claims with multiple decisions can appear more than once.")
+            if claim_records:
+                st.dataframe(
+                    _result_rows(claim_records, CLAIM_RESULT_FIELDS),
+                    hide_index=True,
+                    width="stretch",
+                )
+            else:
+                st.info("No claims matched this search.")
 
 
 if __name__ == "__main__":

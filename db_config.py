@@ -1,5 +1,11 @@
 """Oracle connection settings, supplied through environment variables."""
 import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+from streamlit.errors import StreamlitSecretNotFoundError
+
+load_dotenv(Path(__file__).with_name(".env"))
 
 DEFAULT_DB = "oracle"
 
@@ -13,6 +19,17 @@ TABLE_DEFAULTS = {
 }
 
 
+def _setting(name, default=None):
+    environment_value = os.getenv(name)
+    if environment_value is not None:
+        return environment_value
+    try:
+        import streamlit as st
+        return st.secrets.get(name, default)
+    except StreamlitSecretNotFoundError:
+        return default
+
+
 def get_settings(backend=None):
     selected_backend = (backend or DEFAULT_DB).lower()
     if selected_backend != "oracle":
@@ -20,13 +37,13 @@ def get_settings(backend=None):
 
     settings = {
         "backend": "oracle",
-        "dsn": os.getenv("ORACLE_DSN"),
-        "user": os.getenv("ORACLE_USER"),
-        "password": os.getenv("ORACLE_PASSWORD"),
-        "schema": os.getenv("ORACLE_SCHEMA") or os.getenv("ORACLE_USER"),
+        "dsn": _setting("ORACLE_DSN"),
+        "user": _setting("ORACLE_USER"),
+        "password": _setting("ORACLE_PASSWORD"),
+        "schema": _setting("ORACLE_SCHEMA") or _setting("ORACLE_USER"),
     }
     settings.update({
-        key: os.getenv("ORACLE_" + key.upper(), default)
+        key: _setting("ORACLE_" + key.upper(), default)
         for key, default in TABLE_DEFAULTS.items()
     })
 

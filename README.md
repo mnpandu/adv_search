@@ -13,13 +13,23 @@ $env:ORACLE_SCHEMA = $env:ORACLE_USER
 python -m streamlit run app.py
 ```
 
+For a local Streamlit secrets file, copy `.streamlit/secrets.toml.example` to
+`.streamlit/secrets.toml` and replace the placeholders. The real file is ignored by
+Git. On the target environment, provide the same keys through Streamlit secrets or
+environment variables; environment variables take precedence.
+
 `ORACLE_SCHEMA` is optional when the table owner is the same as `ORACLE_USER`. The
 tables must already exist and be readable by that account. This application only runs
 `SELECT` queries; it does not create, seed, alter, or drop tables.
 
+For local development, fill in the ignored `.env` file. `.env.example` lists the
+required keys without credentials. For deployment, provide those same keys through
+environment variables or Streamlit secrets; explicit environment variables override
+`.env` values.
+
 The environment settings are:
 
-| Setting | Environment variable | Purpose |
+| Setting | Environment variable / Streamlit secret | Purpose |
 | --- | --- | --- |
 | Username | `ORACLE_USER` | Oracle login |
 | Password | `ORACLE_PASSWORD` | Oracle login password |
@@ -44,3 +54,7 @@ Text `In` filters accept comma-separated values, such as `222, 2111`. Quote a va
 containing a comma, for example `"Clinic, Inc", Other`. Date fields support a rolling
 `Within last (days)` range such as 90 days. Named saved searches are kept in the
 active Streamlit session and are cleared when that session ends.
+
+Search results are shown in separate **Cases** and **Claims** tabs. Cases are listed
+once per revision; claims are listed once per decision, so a claim with multiple
+decisions can appear more than once.
