@@ -69,6 +69,7 @@ FIELD_GROUPS = {}
 FIELD_TYPES = {}
 FIELD_OPERATORS = {}
 FIELD_RESULT_GROUPS = {}
+FIELD_RESULT_ORDER = {}
 FIELD_GROUP_QUERIES = {}
 FIELD_GROUP_RESULT_KEYS = {}
 _seen_keys = set()
@@ -90,6 +91,9 @@ for (_order, _group_name, _fields, _query_file, _table_setting,
         _label = _field.get("label")
         _field_type = _field.get("type")
         _operators = _field.get("operators")
+        _result_order = _field.get("result_order", len(_seen_keys))
+        if type(_result_order) is not int or _result_order < -1:
+            raise ValueError(f"Search field {_key!r} result_order must be -1 or a non-negative integer")
         _result_groups = _field.get("result_groups", [])
         if isinstance(_result_groups, list) and _result_groups and set(_result_groups) <= {"cases", "claims"}:
             _result_groups = [_result_key]
@@ -120,3 +124,4 @@ for (_order, _group_name, _fields, _query_file, _table_setting,
         FIELD_TYPES[_key] = _field_type
         FIELD_OPERATORS[_key] = list(_operators)
         FIELD_RESULT_GROUPS[_key] = list(_result_groups)
+        FIELD_RESULT_ORDER[_key] = _result_order

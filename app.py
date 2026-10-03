@@ -12,6 +12,7 @@ from search_fields import (
     FIELD_GROUP_RESULT_KEYS,
     FIELD_OPERATORS,
     FIELD_RESULT_GROUPS,
+    FIELD_RESULT_ORDER,
     FIELD_TYPES,
 )
 
@@ -46,25 +47,18 @@ RESULT_FIELDS_BY_CATEGORY = {
         field_key
         for field_key, _label, _field_type in FIELD_GROUPS[group]
         if FIELD_GROUP_RESULT_KEYS[group] in FIELD_RESULT_GROUPS[field_key]
+        and FIELD_RESULT_ORDER[field_key] != -1
     ]
     for group in QUERY_CATEGORIES
 }
-CASE_RESULT_FIELDS = [
-    field_key
-    for category in CASE_QUERY_CATEGORIES
-    for field_key in RESULT_FIELDS_BY_CATEGORY[category]
-]
-CLAIM_RESULT_FIELDS = [
-    field_key
-    for category in CLAIM_QUERY_CATEGORIES
-    for field_key in RESULT_FIELDS_BY_CATEGORY[category]
-]
-CASE_RESULT_FIELDS = [
-    field_key for group in CASE_QUERY_CATEGORIES for field_key in RESULT_FIELDS_BY_CATEGORY[group]
-]
-CLAIM_RESULT_FIELDS = [
-    field_key for group in CLAIM_QUERY_CATEGORIES for field_key in RESULT_FIELDS_BY_CATEGORY[group]
-]
+CASE_RESULT_FIELDS = sorted(
+    [key for group in CASE_QUERY_CATEGORIES for key in RESULT_FIELDS_BY_CATEGORY[group]],
+    key=FIELD_RESULT_ORDER.get,
+)
+CLAIM_RESULT_FIELDS = sorted(
+    [key for group in CLAIM_QUERY_CATEGORIES for key in RESULT_FIELDS_BY_CATEGORY[group]],
+    key=FIELD_RESULT_ORDER.get,
+)
 
 
 def _result_headers(field_keys):

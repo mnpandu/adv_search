@@ -15,9 +15,8 @@
         "Is empty",
         "Is not empty"
       ],
-      "result_groups": [
-        "case_fields"
-      ]
+      "result_groups": [],
+      "result_order": -1
     },
     {
       "key": "c__case_details_id",
@@ -31,7 +30,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__lob",
@@ -49,7 +49,8 @@
       ],
       "result_groups": [
         "case_fields"
-      ]
+      ],
+      "result_order": 1002
     },
     {
       "key": "c__mac",
@@ -64,7 +65,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__is_act_ind",
@@ -79,7 +81,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__case_type_id",
@@ -93,7 +96,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__case_status",
@@ -111,7 +115,8 @@
       ],
       "result_groups": [
         "case_fields"
-      ]
+      ],
+      "result_order": 1006
     },
     {
       "key": "c__case_substatus",
@@ -129,7 +134,8 @@
       ],
       "result_groups": [
         "case_fields"
-      ]
+      ],
+      "result_order": 1007
     },
     {
       "key": "c__assigned_to",
@@ -144,7 +150,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__status",
@@ -162,7 +169,8 @@
       ],
       "result_groups": [
         "case_fields"
-      ]
+      ],
+      "result_order": 1009
     },
     {
       "key": "c__created_by",
@@ -177,7 +185,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__created_dts",
@@ -193,7 +202,8 @@
       ],
       "result_groups": [
         "case_fields"
-      ]
+      ],
+      "result_order": 1011
     },
     {
       "key": "c__updated_by",
@@ -208,7 +218,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__updated_dts",
@@ -221,7 +232,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "case_number",
@@ -239,7 +251,8 @@
       ],
       "result_groups": [
         "case_fields"
-      ]
+      ],
+      "result_order": 1014
     },
     {
       "key": "c__assigned_to_name",
@@ -257,7 +270,8 @@
       ],
       "result_groups": [
         "case_fields"
-      ]
+      ],
+      "result_order": 1015
     },
     {
       "key": "c__adr_ltr_sent_dt",
@@ -270,7 +284,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__original_due_dt",
@@ -283,7 +298,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__new_due_dt",
@@ -296,7 +312,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__bill_type",
@@ -311,7 +328,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__adr_ltr_rcvd_dt",
@@ -324,7 +342,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__closed_dts",
@@ -340,7 +359,8 @@
       ],
       "result_groups": [
         "case_fields"
-      ]
+      ],
+      "result_order": 1021
     },
     {
       "key": "c__rvsn_reason",
@@ -355,7 +375,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__assigned_dt",
@@ -368,7 +389,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__reference_case_number",
@@ -383,7 +405,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__informatics_case_type",
@@ -398,7 +421,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__ref_demand_bill",
@@ -413,7 +437,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__timeliness_dt",
@@ -426,7 +451,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__adjudication_process",
@@ -441,7 +467,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__ovrd_closed_dts",
@@ -456,7 +483,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__smpl_met_dt",
@@ -469,7 +497,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__language",
@@ -484,7 +513,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "c__adjudication_date",
@@ -497,7 +527,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     }
   ],
   "query": {

@@ -17,7 +17,8 @@
       ],
       "result_groups": [
         "claim_details"
-      ]
+      ],
+      "result_order": 3000
     },
     {
       "key": "cl__bene_first_name",
@@ -32,7 +33,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__bene_last_name",
@@ -47,7 +49,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__bene_middle_name",
@@ -62,7 +65,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__bene_dob",
@@ -75,7 +79,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "mbi",
@@ -93,7 +98,8 @@
       ],
       "result_groups": [
         "claim_details"
-      ]
+      ],
+      "result_order": 3005
     },
     {
       "key": "claim_number",
@@ -111,7 +117,8 @@
       ],
       "result_groups": [
         "claim_details"
-      ]
+      ],
+      "result_order": 3006
     },
     {
       "key": "cl__lob",
@@ -126,7 +133,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__hcpc_code",
@@ -141,7 +149,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__dos_from",
@@ -154,7 +163,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__dos_to",
@@ -167,7 +177,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "claim_status",
@@ -185,7 +196,8 @@
       ],
       "result_groups": [
         "claim_details"
-      ]
+      ],
+      "result_order": 3011
     },
     {
       "key": "cl__created_by",
@@ -200,7 +212,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__created_dts",
@@ -213,7 +226,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__updated_by",
@@ -228,7 +242,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__updated_dts",
@@ -241,7 +256,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__case_id",
@@ -255,7 +271,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__ptan",
@@ -270,7 +287,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__npi",
@@ -285,7 +303,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__hic",
@@ -300,7 +319,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__appeals_case_re_open",
@@ -315,7 +335,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__post_mr_actual_reimb_amount",
@@ -329,7 +350,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__pre_mr_actual_reimb_amount",
@@ -343,7 +365,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__error_indicator",
@@ -358,7 +381,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__mcs_or_fiss_update",
@@ -373,7 +397,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "over_payment",
@@ -390,7 +415,8 @@
       ],
       "result_groups": [
         "claim_details"
-      ]
+      ],
+      "result_order": 3025
     },
     {
       "key": "cl__paid_dt",
@@ -403,7 +429,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__ract_dt",
@@ -416,7 +443,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__mcs_or_fiss_err_msg",
@@ -431,7 +459,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__mcs_or_fiss_update_dt",
@@ -444,7 +473,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__type_of_bill",
@@ -459,7 +489,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__adjustment_claim_number",
@@ -474,7 +505,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__patient_status",
@@ -488,7 +520,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__place_of_service_zip_code",
@@ -503,7 +536,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__claim_refresh",
@@ -518,7 +552,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__claim_refresh_dt",
@@ -531,7 +566,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__place_of_service_state_code",
@@ -546,7 +582,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__mcs_snap_claims_ovr_txn_number",
@@ -560,7 +597,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "cl__mcs_snap_claims_ovr_txn_status",
@@ -575,7 +613,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     }
   ],
   "query": {

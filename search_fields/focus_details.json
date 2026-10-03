@@ -14,7 +14,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__case_details_id",
@@ -28,7 +29,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__focus_cd_desc",
@@ -43,7 +45,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__focus_cd_type",
@@ -58,7 +61,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__modifier",
@@ -73,7 +77,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__cart_cd",
@@ -88,7 +93,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__cart_topic",
@@ -103,7 +109,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__rec_clms_review",
@@ -118,7 +125,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__smpl_clm_cnt",
@@ -132,7 +140,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "focus_code",
@@ -150,7 +159,8 @@
       ],
       "result_groups": [
         "focus_details"
-      ]
+      ],
+      "result_order": 6009
     },
     {
       "key": "f__status",
@@ -165,7 +175,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__created_by",
@@ -180,7 +191,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__created_dts",
@@ -193,7 +205,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__updated_by",
@@ -208,7 +221,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "f__updated_dts",
@@ -221,7 +235,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     }
   ],
   "query": {

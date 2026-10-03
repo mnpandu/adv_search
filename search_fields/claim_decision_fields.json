@@ -17,7 +17,8 @@
       ],
       "result_groups": [
         "claim_decision_fields"
-      ]
+      ],
+      "result_order": 5000
     },
     {
       "key": "d__claim_details_id",
@@ -31,7 +32,8 @@
         "At most",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "qc_review_status",
@@ -49,7 +51,8 @@
       ],
       "result_groups": [
         "claim_decision_fields"
-      ]
+      ],
+      "result_order": 5002
     },
     {
       "key": "d__decision_date",
@@ -62,7 +65,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "d__associated_dcn",
@@ -77,7 +81,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "d__denial_reason",
@@ -92,7 +97,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "d__decision_remarks",
@@ -107,7 +113,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "qc_status",
@@ -125,7 +132,8 @@
       ],
       "result_groups": [
         "claim_decision_fields"
-      ]
+      ],
+      "result_order": 5007
     },
     {
       "key": "reviewed_by",
@@ -143,7 +151,8 @@
       ],
       "result_groups": [
         "claim_decision_fields"
-      ]
+      ],
+      "result_order": 5008
     },
     {
       "key": "d__created_dts",
@@ -156,7 +165,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "d__updated_by",
@@ -171,7 +181,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "d__updated_dts",
@@ -184,7 +195,8 @@
         "Within last (days)",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "qc_review",
@@ -202,7 +214,8 @@
       ],
       "result_groups": [
         "claim_decision_fields"
-      ]
+      ],
+      "result_order": 5012
     },
     {
       "key": "qc_review_comment",
@@ -220,7 +233,8 @@
       ],
       "result_groups": [
         "claim_decision_fields"
-      ]
+      ],
+      "result_order": 5013
     },
     {
       "key": "reviewed_dts",
@@ -236,7 +250,8 @@
       ],
       "result_groups": [
         "claim_decision_fields"
-      ]
+      ],
+      "result_order": 5014
     },
     {
       "key": "d__denial_remarks",
@@ -251,7 +266,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "d__demand_bill",
@@ -266,7 +282,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "d__generic_reason_code",
@@ -281,7 +298,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "d__decision_pretext",
@@ -296,7 +314,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     },
     {
       "key": "d__decision_comments",
@@ -311,7 +330,8 @@
         "Starts with",
         "Is empty",
         "Is not empty"
-      ]
+      ],
+      "result_order": -1
     }
   ],
   "query": {
