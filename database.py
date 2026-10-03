@@ -3,23 +3,45 @@ import re
 from pathlib import Path
 
 from db_config import get_settings
-from search_fields import FIELD_GROUP_QUERIES
+QUERY_FILES = {"Case Details": "search_case_details.sql", "Claim Details": "search_claim_details.sql"}
 
 ROOT = Path(__file__).resolve().parent
 MAX_RECORDS = 10000
 
 
 def build_query(settings, group_name):
-    query_config = FIELD_GROUP_QUERIES[group_name]
-    identifiers = {
-        "schema": settings["schema"],
-        "table": settings[query_config["table_setting"]],
-    }
+    identifiers = {key: value for key, value in settings.items()
+                   if key == "schema" or key.endswith("_table")}
     for key, value in identifiers.items():
         if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", value):
             raise ValueError(f"Invalid database identifier: {key}")
-    query_path = ROOT / query_config["file"]
-    return query_path.read_text(encoding="utf-8").format(**identifiers)
+    return (ROOT / QUERY_FILES[group_name]).read_text(encoding="utf-8").strip().rstrip(";").format(**identifiers)
+
+
+def describe_columns(description, group):
+    columns = []
+    seen = set()
+    for column in description:
+        label = column[0]
+        if label in seen:
+            raise ValueError(f'{group}: duplicate SELECT alias "{label}". Use unique aliases.')
+        seen.add(label)
+        type_name = str(column[1]).upper()
+        kind = "date" if any(t in type_name for t in ("DATE", "TIMESTAMP")) else (
+            "number" if any(t in type_name for t in ("NUMBER", "INT", "FLOAT", "DECIMAL", "DOUBLE")) else "text")
+        columns.append((group + "::" + label, label, kind))
+    return columns
+
+
+def fetch_field_groups(backend=None):
+    settings = get_settings(backend)
+    groups = {}
+    with connect_db(settings) as connection:
+        with connection.cursor() as cursor:
+            for group in QUERY_FILES:
+                cursor.execute("SELECT * FROM (" + build_query(settings, group) + ") query_columns WHERE 1=0")
+                groups[group] = describe_columns(cursor.description, group)
+    return groups
 
 
 def connect_db(settings):
@@ -34,8 +56,8 @@ def connect_db(settings):
 
 def fetch_records_by_group(backend=None, group_names=None):
     settings = get_settings(backend)
-    selected_groups = list(group_names or FIELD_GROUP_QUERIES)
-    unknown_groups = set(selected_groups) - set(FIELD_GROUP_QUERIES)
+    selected_groups = list(group_names or QUERY_FILES)
+    unknown_groups = set(selected_groups) - set(QUERY_FILES)
     if unknown_groups:
         raise ValueError("Unknown query categories: " + ", ".join(sorted(unknown_groups)))
     records_by_group = {}
@@ -43,7 +65,7 @@ def fetch_records_by_group(backend=None, group_names=None):
         with connection.cursor() as cursor:
             for group_name in selected_groups:
                 cursor.execute(build_query(settings, group_name))
-                fields = [column[0].lower() for column in cursor.description]
+                fields = [key for key, _, _ in describe_columns(cursor.description, group_name)]
                 rows = cursor.fetchmany(MAX_RECORDS + 1)
                 if len(rows) > MAX_RECORDS:
                     raise ValueError(
