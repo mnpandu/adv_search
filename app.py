@@ -7,7 +7,7 @@ import streamlit as st
 from database import fetch_records_by_group, fetch_field_groups
 from db_config import get_settings
 
-from search_fields import OPERATORS
+from search_fields import OPERATORS, load_sidebar_fields
 
 MATCH_MODES = ["Match all (AND)", "Match any (OR)"]
 CASE_QUERY_CATEGORIES = ["Case Details"]
@@ -16,7 +16,7 @@ QUERY_CATEGORIES = CASE_QUERY_CATEGORIES + CLAIM_QUERY_CATEGORIES
 FILTER_CATEGORIES = QUERY_CATEGORIES
 
 
-def configure_fields(groups):
+def configure_fields(groups, use_sidebar_config=False):
     global FIELD_GROUPS, SIDEBAR_FIELD_GROUPS, FIELD_LABELS, FIELD_TYPES
     global FIELD_OPERATORS, FIELD_CATEGORY_BY_KEY, CASE_RESULT_FIELDS, CLAIM_RESULT_FIELDS
     FIELD_GROUPS = SIDEBAR_FIELD_GROUPS = groups
@@ -26,6 +26,8 @@ def configure_fields(groups):
     FIELD_CATEGORY_BY_KEY = {key: group for group, fields in groups.items() for key, _, _ in fields}
     CASE_RESULT_FIELDS = [key for key, _, _ in groups["Case Details"]]
     CLAIM_RESULT_FIELDS = [key for key, _, _ in groups["Claim Details"]]
+    if use_sidebar_config:
+        SIDEBAR_FIELD_GROUPS, FIELD_OPERATORS = load_sidebar_fields(groups)
 
 
 configure_fields({"Case Details": [], "Claim Details": []})
@@ -188,7 +190,7 @@ def filter_records(records, criteria, match_mode="Match all (AND)"):
 
 
 def _operators_for_field(field_key):
-    return FIELD_OPERATORS[field_key]
+    return FIELD_OPERATORS.get(field_key, [])
 
 
 def _normalize_saved_criterion(field_key, operator, value):
@@ -449,14 +451,16 @@ def main():
     st.set_page_config(page_title="Advanced Search", layout="wide")
     st.title("Advanced Search")
     try:
-        configure_fields(fetch_field_groups())
+        configure_fields(fetch_field_groups(), use_sidebar_config=True)
     except Exception as exc:
         st.error(f"Cannot load SQL result columns: {exc}")
         st.stop()
-    signature = tuple((group, tuple(fields)) for group, fields in FIELD_GROUPS.items())
+    signature = (tuple((group, tuple(fields)) for group, fields in FIELD_GROUPS.items()),
+                 tuple((group, tuple(fields)) for group, fields in SIDEBAR_FIELD_GROUPS.items()),
+                 tuple((key, tuple(ops)) for key, ops in FIELD_OPERATORS.items()))
     if st.session_state.get("query_columns") != signature:
         st.session_state["search_result"] = None
-        for group, fields in FIELD_GROUPS.items():
+        for group, fields in SIDEBAR_FIELD_GROUPS.items():
             key = f"selected_fields::{group}"
             allowed = {field[0] for field in fields}
             st.session_state[key] = [v for v in st.session_state.get(key, []) if v in allowed]

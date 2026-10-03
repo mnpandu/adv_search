@@ -1,0 +1,130 @@
+{
+  "fields": [
+    {
+      "field": "Case Number",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Lob",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Case Status",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Case Substatus",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Created Dts",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Assigned To Name",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Closed Dts",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Provider Number (PTAN)",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Provider Name",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Focus Code",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    }
+  ]
+}

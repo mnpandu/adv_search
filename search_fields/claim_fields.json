@@ -1,0 +1,118 @@
+{
+  "fields": [
+    {
+      "field": "Claim Number",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Case Number",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Mbi",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Over Payment",
+      "operators": [
+        "Equals",
+        "Greater than",
+        "Less than",
+        "At least",
+        "At most",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Decision Type",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Created By",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Qc Review",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Qc Review Comments",
+      "operators": [
+        "Equals",
+        "In",
+        "Does not equal",
+        "Contains",
+        "Does not contain",
+        "Starts with",
+        "Is empty",
+        "Is not empty"
+      ]
+    },
+    {
+      "field": "Qc Review Dts",
+      "operators": [
+        "On",
+        "Before",
+        "After",
+        "Within last (days)",
+        "Is empty",
+        "Is not empty"
+      ]
+    }
+  ]
+}
