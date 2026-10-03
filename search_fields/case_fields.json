@@ -16,7 +16,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "cases"
+        "case_fields"
       ]
     },
     {
@@ -48,7 +48,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "cases"
+        "case_fields"
       ]
     },
     {
@@ -110,7 +110,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "cases"
+        "case_fields"
       ]
     },
     {
@@ -128,7 +128,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "cases"
+        "case_fields"
       ]
     },
     {
@@ -161,7 +161,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "cases"
+        "case_fields"
       ]
     },
     {
@@ -192,7 +192,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "cases"
+        "case_fields"
       ]
     },
     {
@@ -238,8 +238,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "cases",
-        "claims"
+        "case_fields"
       ]
     },
     {
@@ -257,7 +256,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "cases"
+        "case_fields"
       ]
     },
     {
@@ -340,7 +339,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "cases"
+        "case_fields"
       ]
     },
     {
@@ -500,5 +499,11 @@
         "Is not empty"
       ]
     }
-  ]
+  ],
+  "query": {
+    "file": "search_case.sql",
+    "table_setting": "case_table",
+    "source_alias": "c"
+  },
+  "result_key": "case_fields"
 }

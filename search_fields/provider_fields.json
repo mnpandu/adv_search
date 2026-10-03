@@ -31,7 +31,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "provider_fields"
       ]
     },
     {
@@ -210,7 +210,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "provider_fields"
       ]
     },
     {
@@ -242,5 +242,11 @@
         "Is not empty"
       ]
     }
-  ]
+  ],
+  "query": {
+    "file": "search_provider.sql",
+    "table_setting": "provider_table",
+    "source_alias": "p"
+  },
+  "result_key": "provider_fields"
 }

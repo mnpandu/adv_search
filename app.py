@@ -1,12 +1,19 @@
 import csv
+from collections import defaultdict
 from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
 
 import streamlit as st
-from database import fetch_records
+from database import fetch_records_by_group
 from db_config import get_settings
 
-from search_fields import FIELD_GROUPS, FIELD_OPERATORS, FIELD_RESULT_GROUPS, FIELD_TYPES
+from search_fields import (
+    FIELD_GROUPS,
+    FIELD_GROUP_RESULT_KEYS,
+    FIELD_OPERATORS,
+    FIELD_RESULT_GROUPS,
+    FIELD_TYPES,
+)
 
 SIDEBAR_FIELD_GROUPS = {
     group: fields for group, fields in FIELD_GROUPS.items() if group != "Case Details"
@@ -18,12 +25,45 @@ FIELD_LABELS = {
     for field_key, label, _field_type in fields
 }
 MATCH_MODES = ["Match all (AND)", "Match any (OR)"]
-
+CASE_QUERY_CATEGORIES = [
+    "Case Fields",
+    "Provider Fields",
+    "Focus Details",
+]
+CLAIM_QUERY_CATEGORIES = [
+    "Claim Details",
+    "Claim Decision Fields",
+]
+QUERY_CATEGORIES = [*CASE_QUERY_CATEGORIES, *CLAIM_QUERY_CATEGORIES]
+FILTER_CATEGORIES = list(QUERY_CATEGORIES)
+FIELD_CATEGORY_BY_KEY = {
+    field_key: group
+    for group, fields in FIELD_GROUPS.items()
+    for field_key, _label, _field_type in fields
+}
+RESULT_FIELDS_BY_CATEGORY = {
+    group: [
+        field_key
+        for field_key, _label, _field_type in FIELD_GROUPS[group]
+        if FIELD_GROUP_RESULT_KEYS[group] in FIELD_RESULT_GROUPS[field_key]
+    ]
+    for group in QUERY_CATEGORIES
+}
 CASE_RESULT_FIELDS = [
-    field_key for field_key, groups in FIELD_RESULT_GROUPS.items() if "cases" in groups
+    field_key
+    for category in CASE_QUERY_CATEGORIES
+    for field_key in RESULT_FIELDS_BY_CATEGORY[category]
 ]
 CLAIM_RESULT_FIELDS = [
-    field_key for field_key, groups in FIELD_RESULT_GROUPS.items() if "claims" in groups
+    field_key
+    for category in CLAIM_QUERY_CATEGORIES
+    for field_key in RESULT_FIELDS_BY_CATEGORY[category]
+]
+CASE_RESULT_FIELDS = [
+    field_key for group in CASE_QUERY_CATEGORIES for field_key in RESULT_FIELDS_BY_CATEGORY[group]
+]
+CLAIM_RESULT_FIELDS = [
+    field_key for group in CLAIM_QUERY_CATEGORIES for field_key in RESULT_FIELDS_BY_CATEGORY[group]
 ]
 
 
@@ -31,16 +71,67 @@ def _result_headers(field_keys):
     return [FIELD_LABELS.get(key, key.replace("_", " ").title()) for key in field_keys]
 
 
-def _unique_records(records, key_fields):
-    unique = []
-    seen = set()
+def _index_by(records, key_field):
+    indexed = defaultdict(list)
     for record in records:
-        key = tuple(record.get(field) for field in key_fields)
-        if key in seen:
-            continue
-        seen.add(key)
-        unique.append(record)
-    return unique
+        key = record.get(key_field)
+        if key is not None:
+            indexed[key].append(record)
+    return indexed
+
+
+def _aggregate_fields(records, field_keys):
+    aggregated = {}
+    for field_key in field_keys:
+        values = []
+        seen = set()
+        for record in records:
+            value = record.get(field_key)
+            text = _as_text(value)
+            if text and text not in seen:
+                seen.add(text)
+                values.append(text)
+        aggregated[field_key] = ", ".join(values) if values else None
+    return aggregated
+
+
+def _build_case_details_rows(records_by_category):
+    providers = _index_by(
+        records_by_category["Provider Fields"], "p__case_details_id"
+    )
+    focus_codes = _index_by(
+        records_by_category["Focus Details"], "f__case_details_id"
+    )
+    rows = []
+    for case in records_by_category["Case Fields"]:
+        case_details_id = case.get("c__case_details_id")
+        row = {key: case.get(key) for key in RESULT_FIELDS_BY_CATEGORY["Case Fields"]}
+        for category, index in (
+            ("Provider Fields", providers),
+            ("Focus Details", focus_codes),
+        ):
+            related = index.get(case_details_id, []) if case_details_id is not None else []
+            row.update(_aggregate_fields(related, RESULT_FIELDS_BY_CATEGORY[category]))
+        rows.append(row)
+    return rows
+
+
+def _build_claim_details_rows(records_by_category):
+    decisions = _index_by(
+        records_by_category["Claim Decision Fields"], "d__claim_details_id"
+    )
+    claim_fields = RESULT_FIELDS_BY_CATEGORY["Claim Details"]
+    decision_fields = RESULT_FIELDS_BY_CATEGORY["Claim Decision Fields"]
+    rows = []
+    for claim in records_by_category["Claim Details"]:
+        decision_rows = decisions.get(claim.get("cl__claim_details_id"), [])
+        if not decision_rows:
+            decision_rows = [{}]
+        for decision in decision_rows:
+            row = {key: claim.get(key) for key in claim_fields}
+            row.update({key: decision.get(key) for key in decision_fields})
+            rows.append(row)
+    return rows
 
 
 def _result_rows(records, field_keys):
@@ -343,22 +434,37 @@ def _save_current_search(saved_searches, name, match_mode, selected_groups, fiel
 
 
 def _search(selected_fields, match_mode, field_values, backend=None):
-    criteria = [
-        (field_key, field_values[index * 2], field_values[index * 2 + 1])
-        for index, field_key in enumerate(selected_fields)
-    ]
-    records = filter_records(fetch_records(backend), criteria, match_mode)
-    query_text = f" { 'OR' if match_mode == 'Match any (OR)' else 'AND' } ".join(
-        f"{key} {match_operator.lower()} {_as_text(value)!r}"
-        for key, match_operator, value in criteria
-    )
-    return f"{len(records)} matching joined rows", records, query_text
+    criteria_by_category = {category: [] for category in QUERY_CATEGORIES}
+    for index, field_key in enumerate(selected_fields):
+        category = FIELD_CATEGORY_BY_KEY.get(field_key)
+        if category not in FILTER_CATEGORIES:
+            raise ValueError(f"Field {field_key!r} has no active category query")
+        criteria_by_category[category].append((
+            field_key,
+            field_values[index * 2],
+            field_values[index * 2 + 1],
+        ))
+
+    raw_records = fetch_records_by_group(backend, QUERY_CATEGORIES)
+    records_by_category = {}
+    query_text_by_category = {}
+    for category in QUERY_CATEGORIES:
+        criteria = criteria_by_category[category]
+        records_by_category[category] = filter_records(
+            raw_records[category], criteria, match_mode
+        )
+        query_text_by_category[category] = f" { 'OR' if match_mode == 'Match any (OR)' else 'AND' } ".join(
+            f"{key} {match_operator.lower()} {_as_text(value)!r}"
+            for key, match_operator, value in criteria
+        )
+    total_rows = sum(len(records) for records in records_by_category.values())
+    return f"{total_rows} source rows across {len(QUERY_CATEGORIES)} queries", records_by_category, query_text_by_category
 
 
 def _run_saved_search(search, backend=None):
     keys, match_mode, values = _saved_search_values(search)
     if not keys:
-        return "Saved search is invalid.", [], ""
+        return "Saved search is invalid.", {}, {}
     return _search(keys, match_mode, values, backend)
 
 
@@ -582,36 +688,51 @@ def main():
         st.error(f"Search failed: {st.session_state['search_error']}")
     result = st.session_state.get("search_result")
     if result:
-        summary, records, query_text = result
-        case_records = _unique_records(records, ("c__case_id", "c__revision"))
-        claim_records = _unique_records(records, ("cl__claim_details_id", "d__claim_decision_id"))
+        summary, records_by_category, query_text_by_category = result
+        case_rows = _build_case_details_rows(records_by_category)
+        claim_rows = _build_claim_details_rows(records_by_category)
+        claim_count = len({row.get("cl__claim_details_id") for row in claim_rows
+                           if row.get("cl__claim_details_id") is not None})
         st.subheader("Results")
+        st.caption(summary)
         case_tab, claim_tab = st.tabs([
-            f"Cases ({len(case_records)})",
-            f"Claims ({len(claim_records)})",
+            f"Case Details ({len(case_rows)})",
+            f"Claim Details ({claim_count})",
         ])
-        if query_text:
-            st.caption(query_text)
         with case_tab:
-            st.caption("One row per matching case revision.")
-            if case_records:
+            case_filters = [
+                f"{category}: {query_text_by_category[category]}"
+                for category in CASE_QUERY_CATEGORIES
+                if query_text_by_category.get(category)
+            ]
+            st.caption(" | ".join(case_filters) if case_filters else "No case-related filters; showing all case details.")
+            if CASE_RESULT_FIELDS and case_rows:
                 st.dataframe(
-                    _result_rows(case_records, CASE_RESULT_FIELDS),
+                    _result_rows(case_rows, CASE_RESULT_FIELDS),
                     hide_index=True,
                     width="stretch",
                 )
+            elif not CASE_RESULT_FIELDS:
+                st.info("No result fields are enabled for Case Details in the category JSON files.")
             else:
-                st.info("No cases matched this search.")
+                st.info("No case details matched this search.")
         with claim_tab:
-            st.caption("One row per matching claim decision; claims with multiple decisions can appear more than once.")
-            if claim_records:
+            claim_filters = [
+                f"{category}: {query_text_by_category[category]}"
+                for category in CLAIM_QUERY_CATEGORIES
+                if query_text_by_category.get(category)
+            ]
+            st.caption(" | ".join(claim_filters) if claim_filters else "No claim-related filters; showing all claim details.")
+            if CLAIM_RESULT_FIELDS and claim_rows:
                 st.dataframe(
-                    _result_rows(claim_records, CLAIM_RESULT_FIELDS),
+                    _result_rows(claim_rows, CLAIM_RESULT_FIELDS),
                     hide_index=True,
                     width="stretch",
                 )
+            elif not CLAIM_RESULT_FIELDS:
+                st.info("No result fields are enabled for Claim Details in the category JSON files.")
             else:
-                st.info("No claims matched this search.")
+                st.info("No claim details matched this search.")
 
 
 if __name__ == "__main__":

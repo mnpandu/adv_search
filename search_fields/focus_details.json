@@ -149,7 +149,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "focus_details"
       ]
     },
     {
@@ -223,5 +223,11 @@
         "Is not empty"
       ]
     }
-  ]
+  ],
+  "query": {
+    "file": "search_focus_code.sql",
+    "table_setting": "focus_table",
+    "source_alias": "f"
+  },
+  "result_key": "focus_details"
 }

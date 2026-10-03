@@ -44,21 +44,28 @@ The environment settings are:
 
 ## Search Configuration
 
-Each category has its own JSON file in `search_fields/` (for example,
-`case_fields.json` or `claim_details.json`). Edit that category file to add, remove, or
-rename fields and change their operators. The `order` value controls category order.
-Set a field's `result_groups` to `["cases"]`, `["claims"]`, or `["cases", "claims"]`
-to show it in those result tabs. Omit the property or use an empty list to keep the
-field selectable but hide it from results. Removing the field entry removes it from both filters and
-results. Every field key must match a column alias in `search_oracle.sql`. Restart the
-app to reload the files. The query joins the configured Oracle tables and returns up
-to 10,000 rows for filtering in the application; it does not perform DDL.
+Each category has its own JSON file in `search_fields/` and its own single-table SQL
+file, such as `case_fields.json` with `search_case.sql`. The JSON `query` object maps
+the category to its SQL file and Oracle table setting. Its `result_key` identifies the
+category's field-result group. Edit a category file to add, remove, or rename fields
+and change their operators. The `order` value controls category order. Field
+`result_groups` controls whether that field appears in the result view; an empty list
+keeps it selectable but hides it from results. Removing the field entry removes it
+from both filters and results. Each field key must match an alias in its category's
+SQL file. Restart the app to reload the files.
+
+The app runs five independent queries for Case Fields, Claim Details, Provider,
+Claim Decision, and Focus. Results are grouped into two top-level views: **Case
+Details** combines Case Fields, Provider, and Focus data by case details ID; multiple
+provider/focus values are aggregated to avoid duplicate case rows. **Claim Details**
+combines Claims and Decisions by claim details ID, with one row per decision. Filters
+apply only to their source query category. The separate Case Details table definition
+remains in the catalog but is not queried or shown. Each query returns up to 10,000
+rows and performs no DDL.
 
 Text `In` filters accept comma-separated values, such as `222, 2111`. Quote a value
 containing a comma, for example `"Clinic, Inc", Other`. Date fields support a rolling
 `Within last (days)` range such as 90 days. Named saved searches are kept in the
 active Streamlit session and are cleared when that session ends.
 
-Search results are shown in separate **Cases** and **Claims** tabs. Cases are listed
-once per revision; claims are listed once per decision, so a claim with multiple
-decisions can appear more than once.
+Search results appear in the **Case Details** and **Claim Details** tabs.

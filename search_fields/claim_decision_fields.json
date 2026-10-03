@@ -16,7 +16,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_decision_fields"
       ]
     },
     {
@@ -48,7 +48,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_decision_fields"
       ]
     },
     {
@@ -124,7 +124,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_decision_fields"
       ]
     },
     {
@@ -142,7 +142,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_decision_fields"
       ]
     },
     {
@@ -201,7 +201,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_decision_fields"
       ]
     },
     {
@@ -219,7 +219,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_decision_fields"
       ]
     },
     {
@@ -235,7 +235,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_decision_fields"
       ]
     },
     {
@@ -313,5 +313,11 @@
         "Is not empty"
       ]
     }
-  ]
+  ],
+  "query": {
+    "file": "search_decision.sql",
+    "table_setting": "decision_table",
+    "source_alias": "d"
+  },
+  "result_key": "claim_decision_fields"
 }

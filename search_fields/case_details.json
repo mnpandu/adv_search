@@ -14,6 +14,9 @@
         "At most",
         "Is empty",
         "Is not empty"
+      ],
+      "result_groups": [
+        "case_details"
       ]
     },
     {
@@ -156,6 +159,9 @@
         "Starts with",
         "Is empty",
         "Is not empty"
+      ],
+      "result_groups": [
+        "case_details"
       ]
     },
     {
@@ -227,6 +233,9 @@
         "Starts with",
         "Is empty",
         "Is not empty"
+      ],
+      "result_groups": [
+        "case_details"
       ]
     },
     {
@@ -242,6 +251,9 @@
         "Starts with",
         "Is empty",
         "Is not empty"
+      ],
+      "result_groups": [
+        "case_details"
       ]
     },
     {
@@ -272,6 +284,9 @@
         "Starts with",
         "Is empty",
         "Is not empty"
+      ],
+      "result_groups": [
+        "case_details"
       ]
     },
     {
@@ -377,6 +392,9 @@
         "Starts with",
         "Is empty",
         "Is not empty"
+      ],
+      "result_groups": [
+        "case_details"
       ]
     },
     {
@@ -467,5 +485,11 @@
         "Is not empty"
       ]
     }
-  ]
+  ],
+  "query": {
+    "file": "search_case_details.sql",
+    "table_setting": "case_details_table",
+    "source_alias": "cd"
+  },
+  "result_key": "case_details"
 }

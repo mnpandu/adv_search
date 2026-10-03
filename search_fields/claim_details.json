@@ -16,7 +16,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_details"
       ]
     },
     {
@@ -92,7 +92,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_details"
       ]
     },
     {
@@ -110,7 +110,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_details"
       ]
     },
     {
@@ -184,7 +184,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_details"
       ]
     },
     {
@@ -389,7 +389,7 @@
         "Is not empty"
       ],
       "result_groups": [
-        "claims"
+        "claim_details"
       ]
     },
     {
@@ -577,5 +577,11 @@
         "Is not empty"
       ]
     }
-  ]
+  ],
+  "query": {
+    "file": "search_claim_details.sql",
+    "table_setting": "claim_table",
+    "source_alias": "cl"
+  },
+  "result_key": "claim_details"
 }

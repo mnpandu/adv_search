@@ -1,0 +1,22 @@
+SELECT
+    d.claim_decision_id AS d__claim_decision_id,
+    d.claim_details_id AS d__claim_details_id,
+    d.decision_type AS qc_review_status,
+    d.decision_date AS d__decision_date,
+    d.associated_dcn AS d__associated_dcn,
+    d.denial_reason AS d__denial_reason,
+    d.decision_remarks AS d__decision_remarks,
+    d.status AS qc_status,
+    d.created_by AS reviewed_by,
+    d.created_dts AS d__created_dts,
+    d.updated_by AS d__updated_by,
+    d.updated_dts AS d__updated_dts,
+    d.qc_review AS qc_review,
+    d.qc_review_comments AS qc_review_comment,
+    d.qc_review_dts AS reviewed_dts,
+    d.denial_remarks AS d__denial_remarks,
+    d.demand_bill AS d__demand_bill,
+    d.generic_reason_code AS d__generic_reason_code,
+    d.decision_pretext AS d__decision_pretext,
+    d.decision_comments AS d__decision_comments
+FROM {schema}.{table} d
