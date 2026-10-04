@@ -392,6 +392,26 @@ def _search(selected_fields, match_mode, field_values, backend=None):
             f"{key} {match_operator.lower()} {_as_text(value)!r}"
             for key, match_operator, value in criteria
         )
+    # A selected case number scopes claims even when claim filters use OR.
+    case_number_criteria = [
+        ("Claim Details::Case Number", operator, value)
+        for key, operator, value in criteria_by_category["Case Details"]
+        if key == "Case Details::Case Number"
+    ]
+    if case_number_criteria:
+        if "Claim Details::Case Number" not in FIELD_TYPES:
+            raise ValueError('Claim Details query must select the case number AS "Case Number" to filter related claims.')
+        records_by_category["Claim Details"] = filter_records(
+            records_by_category["Claim Details"], case_number_criteria, "Match all (AND)"
+        )
+        scope_text = " AND ".join(
+            f"Case Number {operator.lower()} {_as_text(value)!r}"
+            for _, operator, value in case_number_criteria
+        )
+        existing = query_text_by_category["Claim Details"]
+        query_text_by_category["Claim Details"] = (
+            f"({existing}) AND ({scope_text})" if existing else scope_text
+        )
     total_rows = sum(len(records) for records in records_by_category.values())
     return f"{total_rows} source rows across {len(QUERY_CATEGORIES)} queries", records_by_category, query_text_by_category
 
