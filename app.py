@@ -469,6 +469,20 @@ def _clear_field_widget_state(field_key):
 
 def main():
     st.set_page_config(page_title="Advanced Search", layout="wide")
+    st.markdown("""
+        <style>
+        [data-testid="stMainBlockContainer"] {
+            padding-top: 1rem;
+        }
+        [data-testid="stSidebarUserContent"] {
+            padding-top: 0;
+        }
+        [data-testid="stSidebar"] [data-testid="stHeading"] h3 {
+            padding-top: 0;
+            margin-top: 0;
+        }
+        </style>
+        """, unsafe_allow_html=True)
     st.title("Advanced Search")
     try:
         configure_fields(fetch_field_groups(), use_sidebar_config=True)
