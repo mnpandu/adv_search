@@ -1,4 +1,5 @@
 import csv
+import re
 from collections import defaultdict
 from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
@@ -231,12 +232,16 @@ def _normalize_saved_criterion(field_key, operator, value):
     return {"field": field_key, "operator": operator, "value": normalized_value}
 
 
+def _format_search_name(name):
+    return re.sub(r"[\W_]+", "_", name.strip(), flags=re.UNICODE).strip("_").upper() if isinstance(name, str) else ""
+
+
 def _normalize_saved_search(search):
     if not isinstance(search, dict):
         return None
     name = search.get("name")
     match_mode = search.get("match_mode")
-    if not isinstance(name, str) or not name.strip() or match_mode not in MATCH_MODES:
+    if not _format_search_name(name) or match_mode not in MATCH_MODES:
         return None
 
     raw_criteria = search.get("criteria")
@@ -254,7 +259,7 @@ def _normalize_saved_search(search):
         criteria.append(criterion)
     if not criteria:
         return None
-    return {"name": name.strip(), "match_mode": match_mode, "criteria": criteria}
+    return {"name": _format_search_name(name), "match_mode": match_mode, "criteria": criteria}
 
 
 def _validated_saved_searches(saved_searches):
@@ -265,9 +270,16 @@ def _validated_saved_searches(saved_searches):
     ]
 
 
+def _search_signature(search):
+    return (search["match_mode"], tuple(sorted(
+        (item["field"], item["operator"], repr(item["value"]))
+        for item in search["criteria"]
+    )))
+
+
 def _save_search(saved_searches, name, match_mode, field_keys, field_values):
     existing = _validated_saved_searches(saved_searches)
-    if not isinstance(name, str) or not name.strip() or match_mode not in MATCH_MODES:
+    if not _format_search_name(name) or match_mode not in MATCH_MODES:
         return existing
     if len(field_values) != len(field_keys) * 2:
         return existing
@@ -282,6 +294,9 @@ def _save_search(saved_searches, name, match_mode, field_keys, field_values):
         "criteria": criteria,
     })
     if saved is None:
+        return existing
+    if any(item["name"] == saved["name"] or _search_signature(item) == _search_signature(saved)
+           for item in existing):
         return existing
     return [
         item for item in existing if item["name"].casefold() != saved["name"].casefold()
@@ -315,7 +330,7 @@ def _load_saved_search(saved_searches, active_load, name):
             normalized
             for item in (saved_searches or [])
             if (normalized := _normalize_saved_search(item)) is not None
-            and normalized["name"].casefold() == str(name or "").casefold()
+            and normalized["name"].casefold() == _format_search_name(name).casefold()
         ),
         None,
     )
@@ -334,7 +349,7 @@ def _load_saved_search(saved_searches, active_load, name):
 
 
 def _delete_saved_search(saved_searches, name):
-    target = str(name or "").casefold()
+    target = _format_search_name(name).casefold()
     return [
         normalized
         for item in (saved_searches or [])
@@ -346,7 +361,7 @@ def _delete_saved_search(saved_searches, name):
 def _save_current_search(saved_searches, name, match_mode, selected_groups, field_values):
     field_keys = [key for selected in selected_groups for key in (selected or [])]
     existing = _validated_saved_searches(saved_searches)
-    if not isinstance(name, str) or not name.strip():
+    if not _format_search_name(name):
         return existing, "Enter a name for this search."
     if not field_keys:
         return existing, "Select at least one field before saving."
@@ -362,10 +377,16 @@ def _save_current_search(saved_searches, name, match_mode, selected_groups, fiel
         "criteria": criteria,
     }) is None:
         return existing, "Check each filter operator and value before saving."
+    candidate = _normalize_saved_search({"name": name, "match_mode": match_mode, "criteria": criteria})
+    for item in existing:
+        if item["name"] == candidate["name"]:
+            return existing, f"A saved search named '{item['name']}' already exists."
+        if _search_signature(item) == _search_signature(candidate):
+            return existing, f"These filters are already saved as '{item['name']}'."
     updated = _save_search(saved_searches, name, match_mode, field_keys, field_values)
-    if not updated or updated[-1]["name"].casefold() != name.strip().casefold():
+    if not updated or updated[-1]["name"].casefold() != _format_search_name(name).casefold():
         return updated, "Choose a valid operator and value for every selected field."
-    return updated, f"Saved '{name.strip()}'."
+    return updated, f"Saved '{_format_search_name(name)}'."
 
 
 def _search(selected_fields, match_mode, field_values, backend=None):
@@ -446,6 +467,14 @@ def _apply_saved_search(search):
 
     st.session_state["match_mode"] = match_mode
     st.session_state["saved_search_name"] = saved["name"]
+    st.session_state["expand_field_groups"] = True
+    st.session_state["search_result"] = None
+    st.session_state["search_error"] = None
+
+
+def _apply_and_run_saved_search(search):
+    _apply_saved_search(search)
+    _run_query(*_saved_search_values(search))
 
 
 def _run_query(selected_fields, match_mode, field_values):
@@ -454,6 +483,7 @@ def _run_query(selected_fields, match_mode, field_values):
             selected_fields, match_mode, field_values, "oracle"
         )
         st.session_state["search_error"] = None
+        st.session_state["clear_search_name"] = True
     except Exception as exc:
         st.session_state["search_result"] = None
         st.session_state["search_error"] = str(exc)
@@ -469,6 +499,8 @@ def _clear_field_widget_state(field_key):
 
 def main():
     st.set_page_config(page_title="Advanced Search", layout="wide")
+    if st.session_state.pop("clear_search_name", False):
+        st.session_state["saved_search_name"] = ""
     st.markdown("""
         <style>
         [data-testid="stMainBlockContainer"] {
@@ -480,6 +512,14 @@ def main():
         [data-testid="stSidebar"] [data-testid="stHeading"] h3 {
             padding-top: 0;
             margin-top: 0;
+        }
+        [data-testid="stSidebar"] [class*="st-key-load_saved"] button {
+            justify-content: flex-start;
+            text-align: left;
+        }
+        [data-testid="stSidebar"] [class*="st-key-load_saved"] button p {
+            text-align: left;
+            overflow-wrap: anywhere;
         }
         </style>
         """, unsafe_allow_html=True)
@@ -516,29 +556,18 @@ def main():
 
     with st.sidebar:
         st.subheader("Saved searches")
-        if not saved_searches:
-            st.caption("No saved searches in this session.")
         for sequence, saved in enumerate(saved_searches, start=1):
-            load_col, run_col, remove_col = st.columns([3.5, 1.4, 1.5], gap="small")
-            if load_col.button(
-                f"{sequence}. {saved['name']}",
+            seq_col, load_col, remove_col = st.columns([0.6, 4.9, 1.5], gap="small")
+            seq_col.markdown(f"**{sequence}.**")
+            load_col.button(
+                saved['name'],
                 key=f"load_saved::{sequence}",
                 width="stretch",
-            ):
-                _apply_saved_search(saved)
-                st.rerun()
-            if run_col.button(
-                "Run",
-                key=f"run_saved::{sequence}",
-                help="Run this saved search",
-                icon=":material/play_arrow:",
-                type="secondary",
-                width="stretch",
-            ):
-                _run_query(*_saved_search_values(saved))
-                st.rerun()
+                on_click=_apply_saved_search,
+                args=(saved,),
+            )
             if remove_col.button(
-                "Remove",
+                "",
                 key=f"remove_saved::{sequence}",
                 help="Remove this saved search",
                 icon=":material/delete_outline:",
@@ -550,14 +579,13 @@ def main():
                 )
                 st.rerun()
 
+
         st.text_input(
             "Search name",
             placeholder="e.g. Open cases, last 90 days",
             max_chars=80,
             key="saved_search_name",
         )
-        st.caption("Saved searches are kept for this active session.")
-
         expand_col, collapse_col = st.columns(2)
         if expand_col.button("Expand all", use_container_width=True):
             st.session_state["expand_field_groups"] = True
@@ -651,6 +679,8 @@ def main():
     with search_col:
         if st.button("Search", type="primary", disabled=False):
             _run_query(selected_fields, st.session_state["match_mode"], field_values)
+            if st.session_state.get("clear_search_name"):
+                st.rerun()
     with save_col:
         if st.button("Save search", disabled=not selected_fields):
             updated, message = _save_current_search(
@@ -663,6 +693,7 @@ def main():
             )
             st.session_state["saved_searches"] = updated
             if message.startswith("Saved "):
+                st.session_state["clear_search_name"] = True
                 st.success(message)
                 st.rerun()
             else:
