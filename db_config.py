@@ -10,6 +10,7 @@ load_dotenv(Path(__file__).with_name(".env"))
 DEFAULT_DB = "oracle"
 
 TABLE_DEFAULTS = {
+    "saved_search_table": "saved_searches",
     "case_table": "case_header",
     "case_details_table": "case_details",
     "claim_table": "claim_details",

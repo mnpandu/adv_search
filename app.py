@@ -7,6 +7,7 @@ from decimal import Decimal, InvalidOperation
 import streamlit as st
 from database import fetch_records_by_group, fetch_field_groups
 from db_config import get_settings
+from saved_search_repository import load_saved_searches, insert_saved_search, remove_saved_search
 
 from search_fields import OPERATORS, load_sidebar_fields
 
@@ -551,7 +552,14 @@ def main():
         if state_key not in st.session_state:
             st.session_state[state_key] = default
 
-    saved_searches = _validated_saved_searches(st.session_state["saved_searches"])
+    try:
+        stored_searches = load_saved_searches()
+    except Exception as exc:
+        st.error(f"Cannot load saved searches from Oracle: {exc}")
+        st.stop()
+    saved_searches = _validated_saved_searches(stored_searches)
+    if len(saved_searches) != len(stored_searches):
+        st.warning("Some stored searches use fields or operators no longer configured and cannot be loaded.")
     st.session_state["saved_searches"] = saved_searches
 
     with st.sidebar:
@@ -574,10 +582,12 @@ def main():
                 type="secondary",
                 width="stretch",
             ):
-                st.session_state["saved_searches"] = _delete_saved_search(
-                    saved_searches, saved["name"]
-                )
-                st.rerun()
+                try:
+                    remove_saved_search(saved["name"])
+                except Exception as exc:
+                    st.error(f"Could not remove saved search: {exc}")
+                else:
+                    st.rerun()
 
 
         st.text_input(
@@ -692,11 +702,14 @@ def main():
                  for group in SIDEBAR_FIELD_GROUPS],
                 field_values,
             )
-            st.session_state["saved_searches"] = updated
             if message.startswith("Saved "):
-                st.session_state["clear_search_name"] = True
-                st.success(message)
-                st.rerun()
+                try:
+                    insert_saved_search(updated[-1])
+                except Exception as exc:
+                    st.error(f"Could not save search: {exc}")
+                else:
+                    st.session_state["clear_search_name"] = True
+                    st.rerun()
             else:
                 st.warning(message)
 
