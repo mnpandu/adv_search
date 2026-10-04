@@ -639,10 +639,9 @@ def main():
 
             with st.container(border=True):
                 field_col, operator_col, value_col = st.columns([3, 2, 5])
-                field_col.markdown("Field")
                 field_col.markdown(f"**{FIELD_LABELS[field_key]}**")
                 operator = operator_col.selectbox(
-                    "Operator", operators, key=operator_key
+                    "Operator", operators, key=operator_key, label_visibility="collapsed"
                 )
 
                 if operator in {"Is empty", "Is not empty"}:
@@ -650,26 +649,28 @@ def main():
                     value_col.caption("No value required")
                 elif field_type == "number":
                     value = value_col.number_input(
-                        "Value", value=st.session_state.get(value_key), key=value_key
+                        "Value", value=st.session_state.get(value_key), key=value_key,
+                        label_visibility="collapsed"
                     )
                 elif field_type == "date" and operator == "Within last (days)":
                     if value_key not in st.session_state:
                         st.session_state[value_key] = 90
                     value = value_col.number_input(
-                        "Days", min_value=0, step=1, key=value_key
+                        "Days", min_value=0, step=1, key=value_key, label_visibility="collapsed"
                     )
                 elif field_type == "date":
                     current_value = st.session_state.get(value_key)
                     if isinstance(current_value, str):
                         current_value = date.fromisoformat(current_value[:10])
                     value = value_col.date_input(
-                        "Date", value=current_value, key=value_key
+                        "Date", value=current_value, key=value_key, label_visibility="collapsed"
                     )
                 else:
                     value = value_col.text_input(
                         "Value",
                         placeholder="For In: 222, 2111",
                         key=value_key,
+                        label_visibility="collapsed",
                     )
             field_values.extend([operator, value])
     else:
